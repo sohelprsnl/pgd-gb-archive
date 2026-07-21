@@ -179,11 +179,25 @@ nav.main a:hover::after,nav.main a.active::after{transform:scaleX(1)}
 .ms{transition:transform .14s,box-shadow .14s}.ms:hover{transform:translateY(-2px)}
 a.lname{transition:color .15s}a.lname:hover{color:var(--accent);text-decoration:none}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.navtoggle{display:none}
+@media(max-width:760px){
+  .top .wrap{gap:10px;height:62px;position:relative}
+  .brand .hlogo{height:36px}
+  .brand .btxt b{font-size:13.5px}
+  .brand .btxt span{font-size:10.5px}
+  .navtoggle{display:flex;align-items:center;justify-content:center;margin-left:auto;width:44px;height:38px;background:rgba(255,255,255,.14);border:0;border-radius:9px;color:#fff;font-size:20px;line-height:1;cursor:pointer;flex:none}
+  nav.main{display:none;position:absolute;top:62px;left:0;right:0;background:var(--navy);flex-direction:column;gap:2px;padding:8px 20px 14px;box-shadow:0 12px 22px rgba(0,0,0,.28);border-top:1px solid rgba(255,255,255,.08);z-index:45;flex-wrap:nowrap;margin:0}
+  nav.main.open{display:flex}
+  nav.main a{padding:12px;border-radius:8px;font-size:15px;width:100%}
+  nav.main a::after{display:none}
+}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
   <div class="brand"><img class="hlogo" src="images/logo-iba-mark.png" alt="IBA - Institute of Business Administration"><span class="btxt"><b>PGD-GB Programme Archive</b><span>IBA-SICIP &middot; Batch 11 (2025)</span></span></div>
+  <button class="navtoggle" id="navtoggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
   <nav class="main" id="nav">
     <a data-p="home" class="active">Home</a>
     <a data-p="faculty">Faculty</a>
@@ -408,6 +422,8 @@ fillSel('fMod','module','Modules');fillSel('fSess','session','Sessions');fillSel
 renderS();
 const office=DATA.lecturers.find(l=>l.name==='SICIP IBA Office');
 document.getElementById('contactBox').innerHTML='<h3 class="cbox-title">IBA-SICIP Programme Office</h3><div class="row"><div class="k">Programme</div><div>Post Graduate Diploma in Garments Business (PGD-GB)</div></div><div class="row"><div class="k">Institute</div><div>IBA-SICIP, University of Dhaka</div></div><div class="row"><div class="k">Email</div><div><a href="mailto:'+((office&&office.email1)||'sicip@iba-du.edu')+'">'+((office&&office.email1)||'sicip@iba-du.edu')+'</a></div></div>';
+
+(function(){var t=document.getElementById('navtoggle');if(!t)return;var n=document.getElementById('nav');t.onclick=function(){n.classList.toggle('open');t.setAttribute('aria-expanded',n.classList.contains('open'));};n.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('open');t.setAttribute('aria-expanded','false');});});})();
 </script>
 </body>
 </html>
