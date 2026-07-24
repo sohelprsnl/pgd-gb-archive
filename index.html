@@ -93,6 +93,7 @@ p.sub{color:var(--muted);margin:0 0 22px}
 .mtable td.c,.mtable th.c{text-align:center;width:58px;white-space:nowrap}
 .mtable tr.tot td{font-weight:800;color:var(--navy);background:#f5f7fb;border-top:2px solid var(--line);border-bottom:0}
 .imt-toggle{color:var(--navy);font-weight:700;cursor:pointer;font-size:12px}
+.imt-label{color:var(--navy);font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;margin:8px 0 8px}
 .imt-list{margin-top:8px;display:none}
 .imt-list.show{display:block}
 .imt-list .it{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;padding:4px 0;color:var(--muted);border-top:1px dashed var(--line)}
@@ -216,7 +217,7 @@ a.lname{transition:color .15s}a.lname:hover{color:var(--accent);text-decoration:
           <span class="lbox"><img class="l-du" src="images/logo-du.png" alt="University of Dhaka"></span>
           <span class="lcap">University of Dhaka &#8599;</span>
         </a>
-        <a class="ltile" href="https://iba.du.ac.bd" target="_blank" rel="noopener" title="Institute of Business Administration official website">
+        <a class="ltile" href="https://www.iba-du.edu/localhost/iba/index.html" target="_blank" rel="noopener" title="Institute of Business Administration official website">
           <span class="lbox"><img class="l-iba" src="images/logo-iba.png" alt="IBA"></span>
           <span class="lcap">Institute of Business Administration &#8599;</span>
         </a>
@@ -227,7 +228,7 @@ a.lname{transition:color .15s}a.lname:hover{color:var(--accent);text-decoration:
       </div>
       <div class="ahero-badge">IBA, University of Dhaka &nbsp;&middot;&nbsp; SICIP &nbsp;&middot;&nbsp; Batch 11 &mdash; 2025</div>
       <h1>PGD-GB Programme Archive</h1>
-      <p>The dedicated archive of the IBA-SICIP Post Graduate Diploma in Garments Business, Batch 11 (2025). Faculty and industry mentors, the course curriculum, and the complete class schedule, preserved in one place.</p>
+      <p>The dedicated archive of the IBA-SICIP Post Graduate Diploma in Garment Business, Batch 11 (2025). Faculty and industry mentors, the course curriculum, and the complete class schedule, preserved in one place.</p>
     </div>
     <div class="stats" id="homeStats"></div>
     <div class="homegrid">
@@ -387,7 +388,7 @@ function renderModules(){
       rows+='<tr><td>'+r[0]+'</td><td class="c">'+r[1]+'</td><td class="c">'+r[2]+'</td></tr>';
       if(r[3]==='TOPICS'){
         var tl=MOD.topics.map(function(t){return '<div class="it"><span>'+t[0]+'</span><b>'+t[1]+'</b></div>';}).join('');
-        rows+='<tr class="trow"><td colspan="3"><span class="imt-toggle" onclick="var l=this.nextElementSibling;l.classList.toggle(\'show\');this.textContent=l.classList.contains(\'show\')?\'Hide topics\':\'See full topics (9)\'">See full topics (9)</span><div class="imt-list">'+tl+'</div></td></tr>';
+        rows+='<tr class="trow"><td colspan="3"><div class="imt-label">IMT Sub Topics</div><div class="imt-list show">'+tl+'</div></td></tr>';
       }
     });
     out+='<div class="mod"><h3>'+m.title+'</h3><div class="tot">'+m.sub+'</div>'+
@@ -421,7 +422,7 @@ document.getElementById('sSearch').oninput=function(e){sq=e.target.value;renderS
 fillSel('fMod','module','Modules');fillSel('fSess','session','Sessions');fillSel('fSubj','subject','Subjects');fillSel('fCode','code','Codes');fillSel('fLect','lecturer','Lecturers');fillSel('fType','type','Types');
 renderS();
 const office=DATA.lecturers.find(l=>l.name==='SICIP IBA Office');
-document.getElementById('contactBox').innerHTML='<h3 class="cbox-title">IBA-SICIP Programme Office</h3><div class="row"><div class="k">Programme</div><div>Post Graduate Diploma in Garments Business (PGD-GB)</div></div><div class="row"><div class="k">Institute</div><div>IBA-SICIP, University of Dhaka</div></div><div class="row"><div class="k">Email</div><div><a href="mailto:'+((office&&office.email1)||'sicip@iba-du.edu')+'">'+((office&&office.email1)||'sicip@iba-du.edu')+'</a></div></div>';
+document.getElementById('contactBox').innerHTML='<h3 class="cbox-title">IBA-SICIP Programme Office</h3><div class="row"><div class="k">Programme</div><div>Post Graduate Diploma in Garment Business (PGD-GB)</div></div><div class="row"><div class="k">Institute</div><div>IBA-SICIP, University of Dhaka</div></div><div class="row"><div class="k">Email</div><div><a href="mailto:'+((office&&office.email1)||'sicip@iba-du.edu')+'">'+((office&&office.email1)||'sicip@iba-du.edu')+'</a></div></div>';
 
 (function(){var t=document.getElementById('navtoggle');if(!t)return;var n=document.getElementById('nav');t.onclick=function(){n.classList.toggle('open');t.setAttribute('aria-expanded',n.classList.contains('open'));};n.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('open');t.setAttribute('aria-expanded','false');});});})();
 </script>
