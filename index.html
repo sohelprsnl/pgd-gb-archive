@@ -92,6 +92,8 @@ p.sub{color:var(--muted);margin:0 0 22px}
 .mtable th{color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.4px}
 .mtable td.c,.mtable th.c{text-align:center;width:58px;white-space:nowrap}
 .mtable tr.tot td{font-weight:800;color:var(--navy);background:#f5f7fb;border-top:2px solid var(--line);border-bottom:0}
+.molink{color:var(--accent);font-weight:700;text-decoration:none}
+.molink:hover{text-decoration:underline}
 .imt-toggle{color:var(--navy);font-weight:700;cursor:pointer;font-size:12px}
 .imt-label{color:var(--navy);font-weight:800;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;margin:8px 0 8px}
 .imt-list{margin-top:8px;display:none}
@@ -110,9 +112,19 @@ p.sub{color:var(--muted);margin:0 0 22px}
 table.sch{width:100%;border-collapse:collapse;background:var(--card)}
 .sch-wrap{max-height:68vh;overflow:auto;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);background:#fff}
 .fsel{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:9px 12px;font-size:13.5px;color:var(--ink);font-weight:600;cursor:pointer;max-width:180px}
-table.sch th,table.sch td{padding:11px 13px;text-align:left;font-size:13.5px;border-bottom:1px solid var(--line)}
-table.sch th{background:var(--navy);color:#fff;font-size:12.5px;position:sticky;top:0;z-index:3}
-table.sch td:nth-child(1),table.sch td:nth-child(2),table.sch td:nth-child(3),table.sch td:nth-child(5),table.sch td:nth-child(6),table.sch td:nth-child(7){white-space:nowrap}
+table.sch th,table.sch td{padding:8px 10px;text-align:left;font-size:12px;border-bottom:1px solid var(--line)}
+table.sch th{background:var(--navy);color:#fff;font-size:11px;position:sticky;top:0;z-index:3}
+table.sch{table-layout:fixed;min-width:820px}
+table.sch td{vertical-align:top}
+table.sch td:nth-child(1),table.sch td:nth-child(2),table.sch td:nth-child(3),table.sch td:nth-child(7){white-space:nowrap}
+table.sch th:nth-child(1),table.sch td:nth-child(1){width:9%}
+table.sch th:nth-child(2),table.sch td:nth-child(2){width:7%}
+table.sch th:nth-child(3),table.sch td:nth-child(3){width:8%}
+table.sch th:nth-child(4),table.sch td:nth-child(4){width:15%}
+table.sch th:nth-child(5),table.sch td:nth-child(5){width:29%}
+table.sch th:nth-child(6),table.sch td:nth-child(6){width:23%}
+table.sch th:nth-child(7),table.sch td:nth-child(7){width:9%}
+table.sch td:nth-child(5) b{white-space:nowrap}
 a.lname{color:var(--navy);font-weight:600;cursor:pointer}a.lname:hover{text-decoration:underline}
 table.sch tr:last-child td{border-bottom:0}
 table.sch tr:hover td{background:#f7f9fc}
@@ -165,10 +177,10 @@ table.sch tr:hover td{background:#f7f9fc}
 @keyframes upIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .page.show{animation:fadeIn .4s ease both}
-.page.show .stat,.page.show .card,.page.show .mod,.page.show .ms,.page.show .panel,.page.show .person,.page.show .contact{animation:upIn .55s ease both}
-.page.show .stat:nth-child(1){animation-delay:.04s}.page.show .stat:nth-child(2){animation-delay:.1s}.page.show .stat:nth-child(3){animation-delay:.16s}.page.show .stat:nth-child(4){animation-delay:.22s}
-.page.show .ms:nth-child(2){animation-delay:.07s}.page.show .ms:nth-child(3){animation-delay:.13s}.page.show .ms:nth-child(4){animation-delay:.19s}
-.page.show .mod:nth-child(1){animation-delay:.05s}.page.show .mod:nth-child(2){animation-delay:.13s}.page.show .mod:nth-child(3){animation-delay:.21s}
+body.anim .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.65,.25,1),transform .7s cubic-bezier(.2,.65,.25,1)}
+body.anim .rv.rv-in{opacity:1;transform:none}
+.stat,.person,.mod{transition:transform .28s ease,box-shadow .28s ease}
+.stat:hover,.person:hover,.mod:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(15,23,42,.13)}
 nav.main a{position:relative;transition:color .2s}
 nav.main a::after{content:"";position:absolute;left:12px;right:12px;bottom:5px;height:2px;background:var(--accent);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .28s ease}
 nav.main a:hover::after,nav.main a.active::after{transform:scaleX(1)}
@@ -198,8 +210,67 @@ a.lname{transition:color .15s}a.lname:hover{color:var(--accent);text-decoration:
 .obj{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow);display:flex;gap:13px;align-items:flex-start}
 .obj .objn{flex:none;width:34px;height:34px;border-radius:9px;background:var(--accent);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px}
 .obj p{margin:0;font-size:14px;color:var(--ink);line-height:1.5}
-.page.show .obj{animation:upIn .5s ease both}
+.obj{transition:transform .28s ease,box-shadow .28s ease}
+.obj:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(15,23,42,.1)}
 @media(max-width:820px){.objgrid{grid-template-columns:1fr}}
+.mod2wrap{margin-top:22px;background:var(--card);border:1px solid var(--line);border-top:5px solid var(--accent);border-radius:14px;padding:22px 24px;box-shadow:var(--shadow)}
+.m2h{margin:0 0 3px;color:var(--navy);font-size:19px}
+.m2sub{margin:0 0 16px;color:var(--muted);font-size:13px}
+.m2t{width:100%;border-collapse:collapse;margin-bottom:22px}
+.m2t th,.m2t td{padding:8px 9px;font-size:13.5px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.m2t th{color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;font-weight:800}
+.m2t th.c,.m2t td.c{text-align:center;width:180px}
+.m2t td.c{white-space:nowrap;color:var(--ink)}
+.m2t td:first-child{color:var(--navy);font-weight:600}
+.m2t tr.tot td{font-weight:800;color:var(--navy);background:#f5f7fb;border-top:2px solid var(--navy);border-bottom:0}
+.st-toggle{display:inline-block;color:var(--accent);font-weight:700;cursor:pointer;font-size:11.5px;margin-left:8px;white-space:nowrap}
+.st-toggle:hover{text-decoration:underline}
+.st-list{display:none;margin:7px 0 2px 2px}
+.st-list.show{display:block}
+.st-list .st{font-size:12.5px;color:var(--ink);padding:4px 0;border-top:1px dashed var(--line)}
+@media(max-width:820px){.m2t th.c,.m2t td.c{width:96px;white-space:normal}}
+.ia-head h2{margin:0 0 6px;color:var(--navy);font-size:26px}
+.ia-head p{margin:0;color:var(--muted);font-size:14px}
+.ia-mine{background:var(--navy);color:#fff;border-radius:12px;padding:16px 20px;margin-top:20px;box-shadow:var(--shadow)}
+.ia-mine-row{display:flex;gap:14px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.ia-mine-row:last-child{border-bottom:0}
+.ia-mine-k{flex:none;width:150px;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--accent);font-weight:800;padding-top:3px}
+.ia-mine-v{font-size:14px;line-height:1.5;color:#fff}
+.ia-mine-v em{display:block;font-style:normal;font-size:12px;color:rgba(255,255,255,.7);margin-top:3px}
+.ia-mine-v a{color:#fff;text-decoration:underline}
+.ia-mine-v a:hover{color:var(--accent)}
+@media(max-width:600px){.ia-mine-row{flex-direction:column;gap:3px}.ia-mine-k{width:auto}}
+.ia-sec{margin-top:30px}
+.ia-sec>h3{color:var(--navy);font-size:16px;margin:0 0 14px;display:flex;align-items:center;gap:9px}
+.ia-sec>h3:before{content:"";width:5px;height:18px;background:var(--accent);border-radius:3px}
+.ia-tl{list-style:none;margin:0;padding:0 0 0 2px;border-left:2px solid var(--line)}
+.ia-tl li{position:relative;padding:0 0 16px 22px}
+.ia-tl li:last-child{padding-bottom:0}
+.ia-tl li:before{content:"";position:absolute;left:-8px;top:3px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.ia-tl b{color:var(--navy);font-size:13.5px}
+.ia-tl span{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.ia-panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow)}
+.ia-req ul{margin:0;padding-left:18px}
+.ia-req li{font-size:13.5px;color:var(--ink);line-height:1.55;margin-bottom:8px}
+.ia-req li:last-child{margin-bottom:0}
+.ia-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.ia-card{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 16px;box-shadow:var(--shadow)}
+.ia-ico{flex:none;width:38px;height:38px;border-radius:9px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800}
+.ia-card b{display:block;color:var(--navy);font-size:13.5px;margin-bottom:3px}
+.ia-card span{display:block;color:var(--muted);font-size:12px;line-height:1.45}
+.ia-tag{color:var(--accent)!important;font-weight:700;font-size:10.5px!important;text-transform:uppercase;letter-spacing:.3px;margin-top:4px}
+.ia-sub{margin:0 0 12px;font-size:12.5px;color:var(--muted);line-height:1.5}
+.ia-ph{font-weight:800;color:var(--navy);font-size:12px;text-transform:uppercase;letter-spacing:.3px;margin-bottom:11px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+.ia-ol{margin:0;padding-left:20px}
+.ia-ol li{font-size:13px;color:var(--ink);line-height:1.5;margin-bottom:7px}
+.ia-ol li:last-child{margin-bottom:0}
+.ia-rtable{width:100%;border-collapse:collapse}
+.ia-rtable td{padding:7px 8px;font-size:13px;border-bottom:1px solid var(--line);vertical-align:top}
+.ia-rtable td:first-child{color:var(--navy);font-weight:600}
+.ia-rtable td:last-child{text-align:right;color:var(--muted);white-space:nowrap;font-size:12px;width:110px}
+.ia-rtable tr:last-child td{border-bottom:0}
+.ia-note{margin-top:13px;font-size:12.5px;color:var(--ink);background:#fff6ef;border:1px solid #f5d9c4;border-radius:9px;padding:10px 13px;line-height:1.5}
+@media(max-width:820px){.ia-grid{grid-template-columns:1fr}.ia-head h2{font-size:22px}}
 </style>
 </head>
 <body>
@@ -211,7 +282,8 @@ a.lname{transition:color .15s}a.lname:hover{color:var(--accent);text-decoration:
     <a data-p="faculty">Faculty</a>
     <a data-p="curriculum">Modules</a>
     <a data-p="coursepdf">Course Curriculum</a>
-    <a data-p="schedule">Schedule</a>
+    <a data-p="schedule">Class History</a>
+    <a data-p="internship">Industry Attachment</a>
     <a href="https://sohelprsnl.com/sicip-pgdgb-batch11-results/" target="_blank" rel="noopener" class="ext">Results &#8599;</a>
     <a data-p="contact">Contact</a>
   </nav>
@@ -281,18 +353,18 @@ a.lname{transition:color .15s}a.lname:hover{color:var(--accent);text-decoration:
     <p class="sub" style="margin-bottom:14px">Three modules &middot; 108 classes &middot; 30 credits.</p>
     <div id="modSummary"></div>
     <div class="modrow" id="modRow"></div>
+    <div id="mod2detail" class="reveal"></div>
     <div class="modcta">
       <p class="modcta-t">Batch 11 examination results are published.</p>
       <a class="btn cta" href="https://sohelprsnl.com/sicip-pgdgb-batch11-results/" target="_blank" rel="noopener">Check Results &#8599;</a>
     </div>
   </section>
   <section class="page" id="schedule">
-    <h2 class="sec">Class Schedule</h2>
-    <p class="sub">All scheduled sessions, in date order. Header stays frozen; filter by any column or search.</p>
+    <h2 class="sec">Class History</h2>
+    <p class="sub">Every class held across the batch, in date order. Header stays frozen; filter by any column or search.</p>
     <div class="controls">
       <div class="search"><input id="sSearch" placeholder="Search subject or lecturer..."></div>
       <select id="fMod" class="fsel"></select>
-      <select id="fSess" class="fsel"></select>
       <select id="fSubj" class="fsel"></select>
       <select id="fCode" class="fsel"></select>
       <select id="fLect" class="fsel"></select>
@@ -322,6 +394,114 @@ a.lname{transition:color .15s}a.lname:hover{color:var(--accent);text-decoration:
         </div>
       </div>
       <div class="contact" id="contactBox"></div>
+    </div>
+  </section>
+  <section class="page" id="internship">
+    <div class="ia-head">
+      <h2>Industry Attachment &middot; Activities &middot; Report &middot; Defense</h2>
+      <p>Module-3 Internship &middot; process, requirements, forms and report format.</p>
+    </div>
+
+    <div class="ia-mine">
+      <div class="ia-mine-row"><span class="ia-mine-k">My topic</span><span class="ia-mine-v">Sustainable and Ethical Sourcing Practices and Their Challenges in the Bangladeshi RMG Industry: A Buying / Liaison Office Perspective<em>An empirical study based on woven-bottoms sourcing at the LPP S.A. Bangladesh Liaison Office</em></span></div>
+      <div class="ia-mine-row"><span class="ia-mine-k">Academic supervisor</span><span class="ia-mine-v"><a href="https://www.du.ac.bd/faculty/faculty_details/IBA/2666" target="_blank" rel="noopener">Mohammad Saif Noman Khan</a>, Associate Professor, Institute of Business Administration, University of Dhaka</span></div>
+    </div>
+
+    <div class="ia-sec">
+      <h3>Schedule of activities</h3>
+      <ul class="ia-tl">
+        <li><b>Industry &amp; Academic Supervisor Selection</b><span>31 January 2026</span></li>
+        <li><b>Industry Orientation Session</b><span>8 February 2026</span></li>
+        <li><b>Industry Attachment starts</b><span>10 February 2026</span></li>
+        <li><b>Submission of Project Proposal Topics</b><span>16 February 2026</span></li>
+        <li><b>Report Writing Workshop</b><span>2 March 2026</span></li>
+        <li><b>Completion of Organizational Attachment Period</b><span>22 March 2026</span></li>
+        <li><b>Submission of Industry Attachment Report</b><span>27 March 2026</span></li>
+        <li><b>Industry Attachment Defense</b><span>To be announced</span></li>
+      </ul>
+    </div>
+
+    <div class="ia-sec">
+      <h3>What the intern must do</h3>
+      <div class="ia-panel ia-req">
+        <ul>
+          <li>Pick a topic tied to your academic learning. Confirm it with the industry supervisor first, then the academic supervisor.</li>
+          <li>Spend a minimum of 24 working days in the organization.</li>
+          <li>Record meetings on the Meeting Signature Sheet: minimum 4 with the academic supervisor and minimum 24 with the industry supervisor.</li>
+          <li>Keep plagiarism under 30 percent and AI detection under 60 percent. Reports above 30 percent plagiarism or above 60 percent AI detection are not accepted.</li>
+          <li>IBA strictly checks each report through iThenticate and shares the checking report before final submission.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ia-sec">
+      <h3>Forms &amp; guidelines</h3>
+      <div class="ia-grid">
+        <div class="ia-card"><div class="ia-ico">C</div><div><b>Consent Form (Report Submission Form)</b><span>Signed by the intern and the academic supervisor.</span></div></div>
+        <div class="ia-card"><div class="ia-ico">A</div><div><b>Daily Activities Sheet Summary</b><span>Minimum 24 days. Signed by the student and the industry supervisor.</span></div></div>
+        <div class="ia-card"><div class="ia-ico">E</div><div><b>Intern Evaluation Form</b><span>Filled by the industry supervisor.</span><span class="ia-tag">Signature + company seal</span></div></div>
+        <div class="ia-card"><div class="ia-ico">M</div><div><b>Meeting Signature Sheet</b><span>Student, academic supervisor (min 4 signs), industry supervisor (min 24 signs).</span></div></div>
+        <div class="ia-card"><div class="ia-ico">N</div><div><b>Physical Notebook / Diary</b><span>Name, ID, Batch and topic on front. Daily activities written in detail.</span></div></div>
+        <div class="ia-card"><div class="ia-ico">G</div><div><b>Industry Attachment Guideline</b><span>Topic, report body, plagiarism rule and defense guideline.</span></div></div>
+      </div>
+    </div>
+
+    <div class="ia-sec">
+      <h3>Report structure</h3>
+      <div class="ia-panel">
+        <p class="ia-sub">Front matter: cover page, title page, acknowledgement, executive summary, table of contents, list of illustrations.</p>
+        <table class="ia-rtable">
+          <tr><td>About your organization</td><td>1 page</td></tr>
+          <tr><td>Your role and responsibilities</td><td>1 page</td></tr>
+          <tr><td>Area to explore / issue</td><td>1 page</td></tr>
+          <tr><td>Objectives and methodology</td><td>&frac12; page</td></tr>
+          <tr><td>Findings based on your objectives</td><td>4 to 8 pages</td></tr>
+          <tr><td>Recommendations with rationale</td><td>2 pages</td></tr>
+          <tr><td>Conclusion</td><td>&frac12; page</td></tr>
+          <tr><td>References</td><td>&mdash;</td></tr>
+          <tr><td>Appendices</td><td>&mdash;</td></tr>
+        </table>
+        <div class="ia-note">Body total 10 to 14 pages, excluding front matter, references and appendices. IBA checks every report through iThenticate. Plagiarism must stay under 30 percent and AI detection under 60 percent; above either limit is not accepted. The checking report is shared before final submission.</div>
+      </div>
+    </div>
+
+    <div class="ia-sec">
+      <h3>Submission checklist</h3>
+      <div class="ia-grid">
+        <div class="ia-panel">
+          <div class="ia-ph">Soft copy &middot; Google Form</div>
+          <ol class="ia-ol">
+            <li>Final Report as PDF</li>
+            <li>Final Report as DOCX</li>
+            <li>Consent Form, filled and scanned (PDF)</li>
+            <li>Daily Activities Sheet Summary, filled and scanned (PDF)</li>
+            <li>Intern Evaluation Form, filled and scanned (PDF)</li>
+            <li>Meeting Signature Sheet, filled and scanned (PDF)</li>
+          </ol>
+        </div>
+        <div class="ia-panel">
+          <div class="ia-ph">Hard copy</div>
+          <ol class="ia-ol">
+            <li>Final Report, 4 sets, signed, ring file, transparent front page</li>
+            <li>Consent Form, filled original</li>
+            <li>Daily Activities Sheet Summary, filled original</li>
+            <li>Intern Evaluation Form, filled original (with seal)</li>
+            <li>Meeting Signature Sheet, filled original</li>
+            <li>Notebook / Diary, filled original</li>
+          </ol>
+        </div>
+      </div>
+      <div class="ia-note">Every uploaded file is named with your Roll number, for example 2511XXXXX.pdf and 2511XXXXX.docx. Hard and soft copy deadline: 19 July 2026.</div>
+    </div>
+
+    <div class="ia-sec">
+      <h3>Defense presentation</h3>
+      <div class="ia-panel ia-req">
+        <ul>
+          <li>10 to 14 slides: title, about the organization, area and objectives, methodology, findings (4 to 8 slides), recommendations (2 slides).</li>
+          <li>10 minutes to present, plus 5 minutes for questions.</li>
+        </ul>
+      </div>
     </div>
   </section>
 </main>
@@ -392,8 +572,8 @@ summaryTotal:["Total","108 Classes",30],
 topics:[["Marketing & Merchandising",7],["Production/ Industrial Engineering",7],["Product Development/Fashion/Dying/Others",7],["Human Resource Management",4],["Commercial and Finance",4],["Managerial Training",4],["Cost Analysis",3],["Compliance",3],["Introduction to RMG",1]],
 modules:[
 {title:"Module 1",sub:"Academic Subject &middot; 40 Classes",rows:[["Accounting for Managers",8,2],["Business Communication",8,2],["Financial Management",8,2],["Managing People and Organization",8,2],["Marketing Management",8,2]],total:["Total",40,10]},
-{title:"Module 2",sub:"Academic 8 + Industry Module Topics 40 &middot; 48 Classes",rows:[["Business Strategy and Innovation",8,2],["Industry Module Topics",40,8,"TOPICS"]],total:["Total",48,10]},
-{title:"Module 3",sub:"Academic 16 + Industry Attachment 4 &middot; 20 Classes",rows:[["Managerial Communication for RMG",8,2],["Business Analytics",8,2],["Industry Attachment-Activities-Report-Defence",4,6]],total:["Total",20,10]}
+{title:"Module 2",sub:"Academic 8 + Industry Module Topics 40 &middot; 48 Classes",rows:[["Business Strategy and Innovation",8,2],["Industry Module Topics",40,8]],total:["Total",48,10]},
+{title:"Module 3",sub:"Academic 16 + Industry Attachment 4 &middot; 20 Classes",rows:[["Managerial Communication for RMG",8,2],["Business Analytics",8,2],["Industry Attachment-Activities-Report-Defence","4 (Minimum)",6,"internship"]],total:["Total",20,10]}
 ]};
 function renderModules(){
   var sh='<div class="msum-strip">';
@@ -404,7 +584,7 @@ function renderModules(){
   MOD.modules.forEach(function(m){
     var rows='';
     m.rows.forEach(function(r){
-      rows+='<tr><td>'+r[0]+'</td><td class="c">'+r[1]+'</td><td class="c">'+r[2]+'</td></tr>';
+      rows+='<tr><td>'+(r[3]?'<a class="molink" href="#" data-go="'+r[3]+'">'+r[0]+' &#8599;</a>':r[0])+'</td><td class="c">'+r[1]+'</td><td class="c">'+r[2]+'</td></tr>';
       if(r[3]==='TOPICS'){
         var tl=MOD.topics.map(function(t){return '<div class="it"><span>'+t[0]+'</span><b>'+t[1]+'</b></div>';}).join('');
         rows+='<tr class="trow"><td colspan="3"><div class="imt-label">IMT Sub Topics</div><div class="imt-list show">'+tl+'</div></td></tr>';
@@ -416,8 +596,38 @@ function renderModules(){
   });
   document.getElementById('modRow').innerHTML=out;
 }
-renderModules();
-var SF={fMod:'module',fSess:'session',fSubj:'subject',fCode:'code',fLect:'lecturer',fType:'type'};
+var MOD2={cats:[
+["Marketing & Merchandising",7,["IMT-10: Strategic Relationship","IMT-11: Merchandising 1","IMT-12: Merchandising 2","IMT-13: Product Development","IMT-14: Selling & Sales Management","IMT-15: Negotiation Skills: Strategies for Increased Effectiveness","IMT-16: Demand Planning & Scheduling"]],
+["Production/ Industrial Engineering",7,["IMT-27: Production/Capacity Planning & Forecasting","IMT-28: Inventory Planning & Forecasting","IMT-29: Product Layout Planning","IMT-30: Supply Chain Management","IMT-31: Quality Control","IMT-32: Lean Management","IMT-33: Material Sourcing & Shipping"]],
+["Product Development/Fashion/Dying/Others",7,["IMT-34: Dyeing, Printing, Finishing","IMT-35: Product Knowledge: Fashion Trend, Innovation & Consumer Behavior","IMT-36: Textile & Garments Technology","IMT-37: Digital Transformation in Garment Business","IMT-38: Disruptive Innovation: Industry 4.0","IMT-39: Fabric Classification, Design & Styling","IMT-40: Sustainability, process and product recycling"]],
+["Human Resource Management",4,["IMT-20: Compensation & Performance Management","IMT-21: Training & Development","IMT-22: Employee Engagement & Retention","IMT-23: Recruitment & Selection"]],
+["Commercial and Finance",4,["IMT-6: Financial Budgeting, Planning & Forecasting","IMT-7: Cash flow & Fund Management","IMT-8: Costing and calculating profits, understanding profitability, margin and breakeven","IMT-9: Banking, Commercial and Customs (LC opening, etc.)"]],
+["Managerial Training",4,["IMT-2: Agile Leadership-Transforming Mindsets","IMT-3: Team Management and Collaboration","IMT-4: Bangladesh Business Law, Management and Entrepreneurship (Textile and RMG Focused)","IMT-5: Global Business Environment"]],
+["Cost Analysis",3,["IMT-17: Cost Behavior and Classification & Cost Volume Profit Analysis","IMT-18: Cost Saving in operation","IMT-19: Various Costing methods: Absorption, Marginal, Process, Product"]],
+["Compliance",3,["IMT-24: Social & Environmental Safety","IMT-25: Occupational Health & Safety","IMT-26: Compliance"]],
+["Introduction to RMG",1,["IMT-1: Industry overview, Threats, Challenges, Opportunities, Global perspective"]]
+],exams:[["Industry Module Topics: 1st Assessment Exam","13 Topics &middot; 13 Classes",[1,4,6,9,11,12,13,14,15,16,20,22,23]],["Industry Module Topics: 2nd Assessment Exam","14 Topics &middot; 14 Classes",[2,3,5,7,8,10,17,18,19,21,24,26,27,28]],["Industry Module Topics: 3rd Assessment Exam","13 Topics &middot; 13 Classes",[25,29,30,31,32,33,34,35,36,37,38,39,40]]]};
+function renderMod2(){
+var IMTMAP={};MOD2.cats.forEach(function(c){c[2].forEach(function(s){var m=s.match(/^IMT-(\d+):/);if(m)IMTMAP[+m[1]]=s;});});
+var h='<div class="mod2wrap"><h3 class="m2h">Module 2 &middot; Industry Module Topics</h3><p class="m2sub">Industry Module Topics Summary &amp; Exam &middot; Main Topics to Sub Topics</p>';
+h+='<table class="m2t"><thead><tr><th>IMT Topics Names</th><th class="c">Classes on Sub&nbsp;Topics</th><th class="c">Credit</th></tr></thead><tbody>';
+MOD2.cats.forEach(function(cat,i){
+var tog=cat[2].length>1?'<span class="st-toggle" data-target="stl'+i+'" data-lbl="See sub topics">See sub topics</span><div class="st-list" id="stl'+i+'">'+cat[2].map(function(s){return '<div class="st">'+s+'</div>';}).join('')+'</div>':'';
+h+='<tr><td>'+cat[0]+tog+'</td><td class="c">'+cat[1]+'</td><td class="c"></td></tr>';
+});
+h+='<tr class="tot"><td>Sub Total</td><td class="c">40</td><td class="c">8</td></tr></tbody></table>';
+h+='<table class="m2t"><thead><tr><th>IMT Exam</th><th class="c">No of Topics</th></tr></thead><tbody>';
+MOD2.exams.forEach(function(e,i){
+var list=e[2].map(function(n){return '<div class="st">'+(IMTMAP[n]||('IMT-'+n))+'</div>';}).join('');
+h+='<tr><td>'+e[0]+'<span class="st-toggle" data-target="stle'+i+'" data-lbl="See more">See more</span><div class="st-list" id="stle'+i+'">'+list+'</div></td><td class="c">'+e[1]+'</td></tr>';
+});
+h+='<tr class="tot"><td>Total</td><td class="c">40 Topics &middot; 40 Classes</td></tr></tbody></table></div>';
+document.getElementById('mod2detail').innerHTML=h;
+document.querySelectorAll('#mod2detail .st-toggle').forEach(function(t){t.onclick=function(){var l=document.getElementById(t.getAttribute('data-target'));var open=l.classList.toggle('show');t.textContent=open?'Hide':t.getAttribute('data-lbl');};});
+}
+renderModules();renderMod2();
+document.addEventListener('click',function(e){var a=e.target.closest?e.target.closest('.molink'):null;if(a){e.preventDefault();var nl=document.querySelector('#nav a[data-p="'+a.getAttribute('data-go')+'"]');if(nl)nl.click();}});
+var SF={fMod:'module',fSubj:'subjectDisplay',fCode:'code',fLect:'lecturer',fType:'type'};
 function modLabel(v){return v?('Module '+v.replace('Module-','')):v;}
 function fillSel(id,field,label){
   var vals=Array.from(new Set(DATA.schedule.map(function(s){return s[field];}).filter(Boolean)));
@@ -428,6 +638,11 @@ function fillSel(id,field,label){
   el.innerHTML=opts; el.onchange=renderS;
 }
 var sq='';
+var IMTSUB={1:"Industry overview, Threats, Challenges, Opportunities, Global perspective",2:"Agile Leadership-Transforming Mindsets",3:"Team Management and Collaboration",4:"Bangladesh Business Law, Management and Entrepreneurship (Textile and RMG Focused)",5:"Global Business Environment",6:"Financial Budgeting, Planning & Forecasting",7:"Cash flow & Fund Management",8:"Costing and calculating profits, understanding profitability, margin and breakeven",9:"Banking, Commercial and Customs (LC opening, etc.)",10:"Strategic Relationship",11:"Merchandising 1",12:"Merchandising 2",13:"Product Development",14:"Selling & Sales Management",15:"Negotiation Skills: Strategies for Increased Effectiveness",16:"Demand Planning & Scheduling",17:"Cost Behavior and Classification & Cost Volume Profit Analysis",18:"Cost Saving in operation",19:"Various Costing methods: Absorption, Marginal, Process, Product",20:"Compensation & Performance Management",21:"Training & Development",22:"Employee Engagement & Retention",23:"Recruitment & Selection",24:"Social & Environmental Safety",25:"Occupational Health & Safety",26:"Compliance",27:"Production/Capacity Planning & Forecasting",28:"Inventory Planning & Forecasting",29:"Product Layout Planning",30:"Supply Chain Management",31:"Quality Control",32:"Lean Management",33:"Material Sourcing & Shipping",34:"Dyeing, Printing, Finishing",35:"Product Knowledge: Fashion Trend, Innovation & Consumer Behavior",36:"Textile & Garments Technology",37:"Digital Transformation in Garment Business",38:"Disruptive Innovation: Industry 4.0",39:"Fabric Classification, Design & Styling",40:"Sustainability, process and product recycling"};
+function codeCell(code){if(!code)return '';var m=String(code).match(/^IMT-0*(\d+)/i);if(m&&IMTSUB[+m[1]])return '<b>'+code+':</b> '+IMTSUB[+m[1]];return code;}
+var IMTASSESS={1:1,2:2,3:2,4:1,5:2,6:1,7:2,8:2,9:1,10:2,11:1,12:1,13:1,14:1,15:1,16:1,17:2,18:2,19:2,20:1,21:2,22:1,23:1,24:2,25:3,26:2,27:2,28:2,29:3,30:3,31:3,32:3,33:3,34:3,35:3,36:3,37:3,38:3,39:3,40:3};
+function ord(n){return n==1?'1st':n==2?'2nd':n==3?'3rd':n+'th';}
+function subjCell(code,subj){var m=String(code||'').match(/^IMT-0*(\d+)/i);if(m&&IMTASSESS[+m[1]])return 'Industry Module Topics: '+ord(IMTASSESS[+m[1]])+' Assessment';return subj;}
 function renderS(){
   var q=sq.toLowerCase();
   var rows=DATA.schedule.filter(function(s){
@@ -435,15 +650,35 @@ function renderS(){
     if(!q) return true;
     return (s.subject+' '+s.code+' '+s.lecturer).toLowerCase().indexOf(q)>=0;
   });
-  document.getElementById('sBody').innerHTML=rows.map(function(s){return '<tr><td>'+(s.disp||'-')+'</td><td>'+mtag(s.module)+'</td><td>'+s.session+'</td><td>'+s.subject+'</td><td>'+s.code+'</td><td>'+(s.lslug?('<a class="lname" href="#" onclick="openModal(\''+s.lslug+'\');return false;">'+s.lecturer+'</a>'):s.lecturer)+'</td><td>'+ttag(s.type)+'</td></tr>';}).join('')||'<tr><td colspan="7" class="sub" style="padding:18px">No matches.</td></tr>';
+  document.getElementById('sBody').innerHTML=rows.map(function(s){return '<tr><td>'+(s.disp||'-')+'</td><td>'+mtag(s.module)+'</td><td>'+s.session+'</td><td>'+subjCell(s.code,s.subject)+'</td><td>'+codeCell(s.code)+'</td><td>'+(s.lslug?('<a class="lname" href="#" onclick="openModal(\''+s.lslug+'\');return false;">'+s.lecturer+'</a>'):s.lecturer)+'</td><td>'+ttag(s.type)+'</td></tr>';}).join('')||'<tr><td colspan="7" class="sub" style="padding:18px">No matches.</td></tr>';
 }
 document.getElementById('sSearch').oninput=function(e){sq=e.target.value;renderS();};
-fillSel('fMod','module','Modules');fillSel('fSess','session','Sessions');fillSel('fSubj','subject','Subjects');fillSel('fCode','code','Codes');fillSel('fLect','lecturer','Lecturers');fillSel('fType','type','Types');
+DATA.schedule.forEach(function(s){s.subjectDisplay=subjCell(s.code,s.subject);});
+fillSel('fMod','module','Modules');fillSel('fSubj','subjectDisplay','Subjects');fillSel('fCode','code','Codes');fillSel('fLect','lecturer','Lecturers');fillSel('fType','type','Types');
 renderS();
 const office=DATA.lecturers.find(l=>l.name==='SICIP IBA Office');
 document.getElementById('contactBox').innerHTML='<h3 class="cbox-title">IBA-SICIP Programme Office</h3><div class="row"><div class="k">Programme</div><div>Post Graduate Diploma in Garment Business (PGD-GB)</div></div><div class="row"><div class="k">Institute</div><div>IBA-SICIP, University of Dhaka</div></div><div class="row"><div class="k">Email</div><div><a href="mailto:'+((office&&office.email1)||'sicip@iba-du.edu')+'">'+((office&&office.email1)||'sicip@iba-du.edu')+'</a></div></div>';
 
 (function(){var t=document.getElementById('navtoggle');if(!t)return;var n=document.getElementById('nav');t.onclick=function(){n.classList.toggle('open');t.setAttribute('aria-expanded',n.classList.contains('open'));};n.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('open');t.setAttribute('aria-expanded','false');});});})();
+(function(){
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  if(!('IntersectionObserver'in window))return;
+  document.body.classList.add('anim');
+  var sel='.stat,.card,.mod,.ms,.panel,.person,.contact,.obj,.mod2wrap,.ia-mine,.ia-sec,.ia-card';
+  var els=[].slice.call(document.querySelectorAll(sel));
+  els.forEach(function(el){el.classList.add('rv');});
+  function countUp(el){
+    var b=el.querySelector('b');if(!b||el._cu)return;
+    var t=parseInt((b.textContent||'').replace(/[^0-9]/g,''),10);if(isNaN(t))return;el._cu=1;
+    var dur=1000,st=null;
+    function step(ts){if(st===null)st=ts;var p=Math.min(1,(ts-st)/dur);b.textContent=Math.round(t*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step);else b.textContent=t;}
+    requestAnimationFrame(step);
+  }
+  var io=new IntersectionObserver(function(ents){ents.forEach(function(e){
+    if(e.isIntersecting){var el=e.target;el.classList.add('rv-in');if(el.classList.contains('stat'))countUp(el);io.unobserve(el);setTimeout(function(){el.classList.remove('rv','rv-in');},760);}
+  });},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(el){io.observe(el);});
+})();
 </script>
 </body>
 </html>
