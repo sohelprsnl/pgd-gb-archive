@@ -1,0 +1,11 @@
+# review copies and build leftovers, never publish these
+_demos/
+images-v2/
+
+# Not used by any page, but it is publicly readable once pushed and it contains
+# every lecturer's emails, phone numbers and LinkedIn URLs in machine-readable form.
+# It is already tracked, so add it here AND run:  git rm --cached _data.json
+_data.json
+
+# zip packages built for upload, not part of the site
+_deploy/
