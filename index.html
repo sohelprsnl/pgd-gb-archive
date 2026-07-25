@@ -181,6 +181,9 @@ body.anim .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-
 body.anim .rv.rv-in{opacity:1;transform:none}
 .stat,.person,.mod{transition:transform .28s ease,box-shadow .28s ease}
 .stat:hover,.person:hover,.mod:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(15,23,42,.13)}
+.statlink{cursor:pointer}
+.statlink:hover b{color:var(--accent)}
+.statlink:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 nav.main a{position:relative;transition:color .2s}
 nav.main a::after{content:"";position:absolute;left:12px;right:12px;bottom:5px;height:2px;background:var(--accent);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .28s ease}
 nav.main a:hover::after,nav.main a.active::after{transform:scaleX(1)}
@@ -241,6 +244,17 @@ a.lname{transition:color .15s}a.lname:hover{color:var(--accent);text-decoration:
 .ia-mine-v a:hover{color:var(--accent)}
 @media(max-width:600px){.ia-mine-row{flex-direction:column;gap:3px}.ia-mine-k{width:auto}}
 .ia-sec{margin-top:30px}
+.cuehint{display:inline-flex;align-items:center;gap:9px;background:#fff6ef;border:1px solid #f5d9c4;border-radius:9px;padding:9px 14px;margin:2px 0 14px;font-size:13px;color:var(--ink);line-height:1.45}
+.cueico{font-size:15px;line-height:1}
+.card{position:relative}
+@media(hover:hover){
+.card .ph:after{content:"View profile";position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to top,rgba(15,23,42,.88),rgba(15,23,42,0));color:#fff;font-size:11.5px;font-weight:700;text-align:center;padding:16px 6px 7px;opacity:0;transition:opacity .25s ease}
+.card:hover .ph:after{opacity:1}
+}
+.pbg{margin-bottom:18px;border-left:5px solid var(--accent)}
+.pbg .sub{margin:0 0 10px;line-height:1.6}
+.ia-two{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+@media(max-width:860px){.ia-two{grid-template-columns:1fr;gap:0}}
 .ia-sec>h3{color:var(--navy);font-size:16px;margin:0 0 14px;display:flex;align-items:center;gap:9px}
 .ia-sec>h3:before{content:"";width:5px;height:18px;background:var(--accent);border-radius:3px}
 .ia-tl{list-style:none;margin:0;padding:0 0 0 2px;border-left:2px solid var(--line)}
@@ -271,6 +285,47 @@ a.lname{transition:color .15s}a.lname:hover{color:var(--accent);text-decoration:
 .ia-rtable tr:last-child td{border-bottom:0}
 .ia-note{margin-top:13px;font-size:12.5px;color:var(--ink);background:#fff6ef;border:1px solid #f5d9c4;border-radius:9px;padding:10px 13px;line-height:1.5}
 @media(max-width:820px){.ia-grid{grid-template-columns:1fr}.ia-head h2{font-size:22px}}
+
+/* ===== Mobile (Android / iPhone) ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:hidden}
+img{max-width:100%}
+@media(max-width:760px){
+  .wrap{padding:0 14px}
+  section.page{padding:22px 0 44px}
+  /* iOS zooms any input under 16px on focus */
+  .search input,.fsel,#fSearch,#sSearch{font-size:16px}
+  .search{min-width:0;width:100%}
+  .filters{gap:7px}
+  .chip{padding:9px 13px;font-size:12.5px}
+  .fsel{max-width:none;flex:1 1 46%;min-width:0}
+  .filters{width:100%}
+  /* tables scroll sideways instead of breaking the layout */
+  .sch-wrap{max-height:none;-webkit-overflow-scrolling:touch}
+  .sch-wrap:before{content:"Swipe sideways to see all columns";display:block;padding:8px 12px;font-size:11.5px;color:var(--muted);background:#f5f7fb;border-bottom:1px solid var(--line)}
+  table.sch{min-width:720px}
+  table.sch th,table.sch td{padding:7px 9px;font-size:11.5px}
+  .mod2wrap{padding:16px 14px}
+  .m2t th,.m2t td{padding:7px 6px;font-size:12.5px}
+  .m2t th.c,.m2t td.c{width:74px;font-size:11.5px}
+  .ia-panel{padding:15px 16px}
+  .ia-rtable td{font-size:12.5px}
+  .ia-rtable td:last-child{width:88px}
+  .pbg .sub{font-size:13.5px}
+  .cuehint{display:flex;font-size:12.5px}
+  /* comfortable tap targets */
+  #nav a{padding:12px 4px}
+  .st-toggle,.molink,.statlink{padding:2px 0}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:13px}
+}
+@media(max-width:430px){
+  .stats{grid-template-columns:1fr 1fr;gap:11px}
+  .stat b{font-size:24px}
+  .grid{grid-template-columns:1fr 1fr;gap:11px}
+  .ia-head h2{font-size:20px}
+  .m2t th.c,.m2t td.c{width:64px}
+  .ia-mine{padding:14px 16px}
+}
 </style>
 </head>
 <body>
@@ -310,13 +365,18 @@ a.lname{transition:color .15s}a.lname:hover{color:var(--accent);text-decoration:
       <p>The dedicated archive of the IBA-SICIP Post Graduate Diploma in Garment Business, Batch 11 (2025). Faculty and industry mentors, the course curriculum, and the complete class schedule, preserved in one place.</p>
     </div>
     <div class="stats" id="homeStats"></div>
+    <div class="panel pbg"><h3>Programme background</h3>
+      <p class="sub">The Post Graduate Diploma in Garment Business is delivered by the Institute of Business Administration, University of Dhaka, under the Skills for Industry Competitiveness and Innovation Program (SICIP).</p>
+      <p class="sub">SICIP is a national workforce development programme of the Government of Bangladesh, jointly financed with the Asian Development Bank at a total cost of USD 375 million. The Finance Division, Ministry of Finance is the executing agency, and the Skills Development Coordination and Monitoring Unit implements it. The programme runs from 2023 to 2029 and targets around 220,000 trainees nationwide.</p>
+      <p class="sub" style="margin-bottom:0">Within SICIP, PGD-GB addresses managerial capability. It equips mid-level professionals in the ready-made garment sector with the strategic, commercial and analytical skills the industry needs to stay competitive.</p>
+    </div>
     <div class="homegrid">
-      <div class="panel"><h3>Three modules, 108 classes</h3>
-        <p class="sub" style="margin:0 0 10px">Module 1 builds the academic foundation. Module 2 pairs business strategy with 40 industry module topics. Module 3 covers applied subjects and the industry internship.</p>
+      <div class="panel"><h3>A curriculum built for the industry</h3>
+        <p class="sub" style="margin:0 0 10px">The curriculum moves from foundation to application. Module 1 builds the academic base. Module 2 pairs business strategy with 40 industry module topics drawn from live RMG practice. Module 3 applies that learning through managerial communication, business analytics and a supervised industry attachment. Thirty credits in total, taught to IBA&rsquo;s standard of academic rigour.</p>
         <div id="homeMods"></div>
       </div>
-      <div class="panel"><h3>Who teaches</h3>
-        <p class="sub" style="margin:0 0 10px">The faculty mixes IBA academics with practising industry leaders, so every topic is taught by someone who lives it.</p>
+      <div class="panel"><h3>Taught by IBA faculty and industry leaders</h3>
+        <p class="sub" style="margin:0 0 10px">The programme draws on the faculty of the Institute of Business Administration, University of Dhaka, the country&rsquo;s foremost business school since 1966. IBA academics teach alongside senior practitioners from the ready-made garment industry, so each topic is delivered by someone who has both studied it and led it in the field.</p>
         <div id="homeWho"></div>
       </div>
     </div>
@@ -336,7 +396,8 @@ a.lname{transition:color .15s}a.lname:hover{color:var(--accent);text-decoration:
   <section class="page" id="faculty">
     <div class="fstick">
     <h2 class="sec">Faculty &amp; Guest Lecturers</h2>
-    <p class="sub">Search by name, organisation or subject. Click a card for the full profile.</p>
+    <p class="sub">Search by name, organisation or subject.</p>
+    <div class="cuehint"><span class="cueico">&#128070;</span><span>Click any photo to open the full profile, with designation, organisation and the subjects taught.</span></div>
     <div class="controls">
       <div class="search"><input id="fSearch" placeholder="Search name, organisation, subject..."></div>
       <div class="filters" id="fFilters">
@@ -407,6 +468,7 @@ a.lname{transition:color .15s}a.lname:hover{color:var(--accent);text-decoration:
       <div class="ia-mine-row"><span class="ia-mine-k">Academic supervisor</span><span class="ia-mine-v"><a href="https://www.du.ac.bd/faculty/faculty_details/IBA/2666" target="_blank" rel="noopener">Mohammad Saif Noman Khan</a>, Associate Professor, Institute of Business Administration, University of Dhaka</span></div>
     </div>
 
+    <div class="ia-two">
     <div class="ia-sec">
       <h3>Schedule of activities</h3>
       <ul class="ia-tl">
@@ -432,6 +494,7 @@ a.lname{transition:color .15s}a.lname:hover{color:var(--accent);text-decoration:
           <li>IBA strictly checks each report through iThenticate and shares the checking report before final submission.</li>
         </ul>
       </div>
+    </div>
     </div>
 
     <div class="ia-sec">
@@ -520,7 +583,20 @@ document.querySelectorAll('#nav a[data-p]').forEach(a=>a.onclick=()=>{
   document.getElementById(a.dataset.p).classList.add('show');window.scrollTo(0,0);
 });
 const S=DATA.stats;
-document.getElementById('homeStats').innerHTML=[[S.faculty,'IBA Faculty &amp; Staff'],[S.industry,'Industry Guest Lecturers'],[3,'Modules'],[S.classes,'Classes']].map(x=>'<div class="stat"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');
+document.getElementById('homeStats').innerHTML=[[S.faculty,'IBA Faculty &amp; Staff','faculty','IBA Faculty & Staff'],[S.industry,'Industry Guest Lecturers','faculty','Industry Guest Lecturer'],[3,'Modules','curriculum',''],[S.classes,'Classes','schedule','']].map(x=>'<div class="stat statlink" data-go="'+x[2]+'" data-chip="'+x[3]+'" tabindex="0" role="link"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');
+(function(){
+  function go(el){
+    var nl=document.querySelector('#nav a[data-p="'+el.getAttribute('data-go')+'"]');if(!nl)return;nl.click();
+    var ch=el.getAttribute('data-chip');
+    if(ch){var c=document.querySelector('#fFilters .chip[data-f="'+ch.replace(/&/g,'&')+'"]');
+      if(!c){[].slice.call(document.querySelectorAll('#fFilters .chip')).forEach(function(x){if(x.dataset.f===ch)c=x;});}
+      if(c)c.click();}
+  }
+  document.querySelectorAll('#homeStats .statlink').forEach(function(el){
+    el.onclick=function(){go(el);};
+    el.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go(el);}};
+  });
+})();
 document.getElementById('homeMods').innerHTML=[['Module 1',S.m1],['Module 2',S.m2],['Module 3',S.m3]].map(x=>'<span class="pill">'+x[0]+' &middot; '+x[1]+' classes</span>').join('');
 document.getElementById('homeWho').innerHTML='<span class="pill">'+S.faculty+' IBA faculty &amp; staff</span><span class="pill">'+S.industry+' industry guest lecturers</span><span class="pill">'+DATA.lecturers.filter(l=>l.img).length+' profiles with photos</span>';
 const dir=DATA.lecturers.filter(l=>l.name!=='SICIP IBA Office');
