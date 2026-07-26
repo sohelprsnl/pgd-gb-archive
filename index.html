@@ -881,6 +881,20 @@ body.anim .rv-in{opacity:1;transform:none;
 .uc-p{margin:0;font-size:var(--fs-base);max-width:46ch;line-height:1.6}
 .uc a{color:var(--accent-ink);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 
+/* ---------- WhatsApp username ---------- */
+.wa{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:var(--s3)}
+.wa-k{font-size:var(--fs-label);font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--slate)}
+.wa-v{font-family:var(--mono,ui-monospace,SFMono-Regular,Menlo,Consolas,monospace);
+  font-size:var(--fs-sm);font-weight:600;color:var(--ink);
+  background:var(--tint-1);border:1px solid var(--line);border-radius:var(--r1);padding:3px 8px}
+.wa-c{font-size:var(--fs-label);font-weight:600;color:var(--accent-ink);cursor:pointer;
+  background:transparent;border:1px solid var(--line);border-radius:var(--r1);
+  min-height:24px;padding:3px 10px;
+  transition:border-color var(--dur-base),background var(--dur-base)}
+.wa-c:hover{border-color:var(--accent-fill);background:var(--tint-1)}
+.wa-n{flex-basis:100%;font-size:var(--fs-xs);color:var(--slate)}
+@media(max-width:640px){.wa-c{min-height:32px;padding:6px 12px}}
+
 /* ---------- forced-colors / Windows High Contrast ---------- */
 @media (forced-colors:active){
   .card,.stat,.panel,.mod,.ms,.ia-card,.ia-panel,.person,.contact,.modal{border:1px solid CanvasText}
@@ -1192,6 +1206,7 @@ body.anim .rv-in{opacity:1;transform:none;
           <p class="psub">IBA-SICIP PGD-GB Batch 11 (2025) &middot; Archive creator</p>
           <p class="pbio">Md. Sohel Rana leads merchandising for European fashion brands at LPP S.A. Bangladesh, with 14+ years in the ready-made garments industry across 35 vendors and about 3 million pieces a year at 97% on-time delivery. He writes the weekly newsletter <i>RMG Xpress Insights by Sohel</i> on sourcing, costing, compliance, and AI. He is a participant in the IBA-SICIP PGD-GB Batch 11 (2025) and designed and built this archive.</p>
           <div class="plinks"><a href="https://www.linkedin.com/in/sohelprsnl/" target=_blank rel=noopener>LinkedIn</a><a href="https://sohelprsnl.com" target=_blank rel=noopener>sohelprsnl.com</a><a href="mailto:sohel.prsnl@gmail.com">Email</a></div>
+          <div class="wa"><span class="wa-k">WhatsApp</span><code class="wa-v" id="waU1">sohelprsnl</code><button class="wa-c" type="button" data-wa="sohelprsnl" aria-label="Copy the WhatsApp username sohelprsnl">Copy</button><span class="wa-n">Search this username inside WhatsApp</span></div>
         </div>
       </div>
       <div class="contact" id="contactBox"></div>
@@ -1218,6 +1233,7 @@ body.anim .rv-in{opacity:1;transform:none;
     <section class="rdisc" aria-labelledby="rdiscH">
       <h3 class="rdisc-h" id="rdiscH">Disclaimer</h3>
       <p>The information published on this page has been compiled from materials shared in the official SICIP WhatsApp group, including PDF copies of examination results and ID card images. It is provided solely for the convenience of students and participants.</p><p>This website is independently maintained and is not an official SICIP website. The SICIP Office and its team have no involvement in the preparation, verification, maintenance, or publication of the information available on this page and should not be held responsible for any errors, omissions, or discrepancies.</p><p>Although every effort has been made to ensure accuracy, mistakes or outdated information may occasionally occur. If you notice any incorrect, missing, or inconsistent information, please contact me directly via WhatsApp or email. I will review the information and update it as soon as possible.</p><p>To avoid unnecessary confusion, please do not raise website-related correction requests in the official SICIP WhatsApp group. Instead, kindly contact me directly via WhatsApp or email.</p><p>Thank you for your understanding and cooperation.</p>
+      <div class="wa"><span class="wa-k">WhatsApp</span><code class="wa-v" id="waU2">sohelprsnl</code><button class="wa-c" type="button" data-wa="sohelprsnl" aria-label="Copy the WhatsApp username sohelprsnl">Copy</button><span class="wa-n">Search this username inside WhatsApp</span></div>
     </section>
   </div></section>
 </main>
@@ -1419,6 +1435,27 @@ document.getElementById('homeWho').innerHTML=
     },{rootMargin:'400px 0px'}).observe(wrap);
   }else{build();}
 })();
+
+/* ---------- copy the WhatsApp username ---------- */
+document.addEventListener('click',function(e){
+  var b=e.target.closest?e.target.closest('.wa-c'):null;
+  if(!b)return;
+  var v=b.getAttribute('data-wa'),done=function(){
+    var old=b.textContent;b.textContent='Copied';
+    setTimeout(function(){b.textContent=old;},1600);
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(v).then(done,function(){fallback();});
+  }else{fallback();}
+  function fallback(){
+    var t=document.createElement('textarea');
+    t.value=v;t.setAttribute('readonly','');
+    t.style.cssText='position:fixed;top:0;left:-9999px';
+    document.body.appendChild(t);t.select();
+    try{document.execCommand('copy');done();}catch(err){}
+    document.body.removeChild(t);
+  }
+});
 
 /* ================= faculty ================= */
 let fFilter='all', fq='';
