@@ -486,11 +486,13 @@ table.sch thead th{background:var(--tint-2);color:var(--slate);
   position:sticky;top:0;z-index:3;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:700}
 table.sch th:nth-child(1),table.sch td:nth-child(1){width:9%}
 table.sch th:nth-child(2),table.sch td:nth-child(2){width:7%}
-table.sch th:nth-child(3),table.sch td:nth-child(3){width:8%}
-table.sch th:nth-child(4),table.sch td:nth-child(4){width:15%}
-table.sch th:nth-child(5),table.sch td:nth-child(5){width:29%}
-table.sch th:nth-child(6),table.sch td:nth-child(6){width:23%}
-table.sch th:nth-child(7),table.sch td:nth-child(7){width:9%}
+table.sch th:nth-child(3),table.sch td:nth-child(3){width:6%}
+/* Subject, Subject Code and Lecturer share one width. The four narrow columns
+   were trimmed to 29% total, each still wide enough for its longest value. */
+table.sch th:nth-child(4),table.sch td:nth-child(4),
+table.sch th:nth-child(5),table.sch td:nth-child(5),
+table.sch th:nth-child(6),table.sch td:nth-child(6){width:23.66%}
+table.sch th:nth-child(7),table.sch td:nth-child(7){width:7%}
 table.sch td:nth-child(1),table.sch td:nth-child(2),table.sch td:nth-child(3),table.sch td:nth-child(7){white-space:nowrap}
 table.sch tbody tr{transition:background var(--dur-fast)}
 table.sch tbody tr:hover td{background:var(--accent-soft)}
@@ -553,7 +555,8 @@ table.sch tbody tr:hover td{background:var(--accent-soft)}
 .ia-mine-v{margin:0;font-size:var(--fs-sm);line-height:1.6;color:#fff;max-width:var(--measure)}
 :root[data-theme=dark] .ia-mine-v{color:var(--ink)}
 .ia-mine-v em{display:block;font-style:normal;font-size:var(--fs-xs);color:#B6BCC4;margin-top:5px;line-height:1.45}
-.ia-by{display:block;margin-top:8px;font-size:var(--fs-sm);font-weight:600}
+.ia-by{display:block;margin:0 0 6px;font-size:var(--fs-sm);font-weight:600}
+.ia-topic{display:block}
 .ia-by a{color:#fff;text-decoration:underline;text-underline-offset:3px}
 .ia-by a:hover{color:var(--accent-fill)}
 :root[data-theme=dark] .ia-by a{color:var(--ink)}
@@ -809,6 +812,54 @@ body.anim .rv-in{opacity:1;transform:none;
   body.anim .rv{opacity:1!important;transform:none!important}
 }
 
+/* ---------- home photo marquee ---------- */
+.pstrip{margin-top:var(--s5)}
+.pstrip-mask{overflow:hidden;padding:5px 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 56px,#000 calc(100% - 56px),transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 56px,#000 calc(100% - 56px),transparent 100%)}
+.pstrip-track{display:flex;gap:12px;width:-webkit-max-content;width:max-content;
+  -webkit-backface-visibility:hidden;backface-visibility:hidden;
+  animation:pstripMove 159s linear infinite}
+.pstrip.paused .pstrip-track,.pstrip.offscreen .pstrip-track,
+.pstrip-track:focus-within{animation-play-state:paused}
+.pstrip{position:relative}
+.pstrip-play{position:absolute;z-index:3;right:0;top:50%;transform:translateY(-50%);
+  width:34px;height:34px;padding:0;border-radius:var(--rfull);border:1px solid var(--line);
+  background:var(--surface);color:var(--ink);box-shadow:var(--e2);cursor:pointer;
+  display:-webkit-box;display:flex;-webkit-box-align:center;align-items:center;
+  -webkit-box-pack:center;justify-content:center;
+  transition:background var(--dur-base) var(--ease),border-color var(--dur-base) var(--ease)}
+.pstrip-play:hover{border-color:var(--accent)}
+.pstrip-play .i-play{display:none}
+.pstrip.paused .pstrip-play .i-pause{display:none}
+.pstrip.paused .pstrip-play .i-play{display:block}
+@keyframes pstripMove{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.pcard{flex:0 0 auto;width:148px;display:block;text-decoration:none;color:inherit;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r3);overflow:hidden;
+  box-shadow:var(--e1);
+  transition:transform var(--dur-base) var(--ease),box-shadow var(--dur-base) var(--ease),border-color var(--dur-base) var(--ease)}
+.pcard:hover,.pcard:focus-visible{transform:translateY(-3px);box-shadow:var(--e2);border-color:var(--accent)}
+.pcard .pph{position:relative;display:block;height:0;padding-top:100%;background:#DCE3EE;overflow:hidden}
+.pcard .pph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pcard .pnm{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  padding:7px 9px 9px;font-size:11.5px;line-height:1.32;font-weight:600;height:2.64em;
+  box-sizing:content-box;overflow:hidden}
+@media(max-width:640px){
+  .pstrip-mask{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%)}
+  .pstrip-track{gap:10px}
+  .pcard{width:116px}
+  .pstrip-play{width:40px;height:40px}
+  .pcard .pnm{font-size:10.5px;padding:6px 7px 8px}
+}
+@media(prefers-reduced-motion:reduce){
+  .pstrip-mask{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .pstrip-track{animation:none!important;transform:none!important}
+  .pstrip-play{display:none}
+}
+@media print{.pstrip{display:none}}
+@media (forced-colors:active){.pcard{border:1px solid CanvasText}}
+
 /* ---------- forced-colors / Windows High Contrast ---------- */
 @media (forced-colors:active){
   .card,.stat,.panel,.mod,.ms,.ia-card,.ia-panel,.person,.contact,.modal{border:1px solid CanvasText}
@@ -874,6 +925,15 @@ body.anim .rv-in{opacity:1;transform:none;
       <p class="prov-counts">46 lecturers &middot; 108 classes &middot; 3 modules &middot; 30 credits &middot; 40 IMT topics</p>
     </div>
         <div class="stats" id="homeStats"></div>
+        <section class="pstrip" id="pstrip" aria-labelledby="pstripH">
+          <h2 class="vh" id="pstripH">Lecturer photo gallery</h2>
+          <div class="pstrip-mask"><div class="pstrip-track" id="pstripTrack"></div></div>
+          <button class="pstrip-play" id="pstripPlay" type="button" aria-pressed="false"
+                  aria-label="Pause the photo strip" title="Pause the photo strip">
+            <svg class="i-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6" y="4" width="4" height="16" rx="1.2"/><rect x="14" y="4" width="4" height="16" rx="1.2"/></svg>
+            <svg class="i-play" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 4.5 19.5 12 8 19.5z"/></svg>
+          </button>
+        </section>
         <div class="panel pbg">
           <h2>Programme background</h2>
           <div class="cols"><p>The Post Graduate Diploma in Garment Business is delivered by the Institute of Business Administration, University of Dhaka, under the Skills for Industry Competitiveness and Innovation Program (SICIP).</p><p>SICIP is a national workforce development programme of the Government of Bangladesh, jointly financed with the Asian Development Bank at a total cost of USD 375 million. The Finance Division, Ministry of Finance is the executing agency, and the Skills Development Coordination and Monitoring Unit implements it. The programme runs from 2023 to 2029 and targets around 220,000 trainees nationwide.</p><p>Within SICIP, PGD-GB addresses managerial capability. It equips mid-level professionals in the ready-made garment sector with the strategic, commercial and analytical skills the industry needs to stay competitive.</p></div>
@@ -985,7 +1045,7 @@ body.anim .rv-in{opacity:1;transform:none;
     </div>
 
     <dl class="ia-mine">
-      <div class="ia-mine-row"><dt class="ia-mine-k">My topic</dt><dd class="ia-mine-v">Sustainable and Ethical Sourcing Practices and Their Challenges in the Bangladeshi RMG Industry: A Buying / Liaison Office Perspective<em>An empirical study based on woven-bottoms sourcing at the LPP S.A. Bangladesh Liaison Office</em><span class="ia-by"><a href="https://sohelprsnl.com" target="_blank" rel="noopener">Md. Sohel Rana</a></span></dd></div>
+      <div class="ia-mine-row"><dt class="ia-mine-k">My topic</dt><dd class="ia-mine-v"><span class="ia-by"><a href="https://sohelprsnl.com" target="_blank" rel="noopener">Md. Sohel Rana</a></span> <span class="ia-topic">Sustainable and Ethical Sourcing Practices and Their Challenges in the Bangladeshi RMG Industry: A Buying / Liaison Office Perspective</span><em>An empirical study based on woven-bottoms sourcing at the LPP S.A. Bangladesh Liaison Office</em></dd></div>
       <div class="ia-mine-row"><dt class="ia-mine-k">Academic supervisor</dt><dd class="ia-mine-v"><a href="https://www.du.ac.bd/faculty/faculty_details/IBA/2666" target="_blank" rel="noopener">Mohammad Saif Noman Khan</a>, Associate Professor, Institute of Business Administration, University of Dhaka</dd></div>
     </dl>
 
@@ -1288,6 +1348,45 @@ document.getElementById('homeWho').innerHTML=
  +'<span class="pill">'+COUNT.lecturers+' lecturers in total</span>'
  +'<span class="pill">'+COUNT.office+' IBA SICIP office &amp; programme coordination</span>';
 
+/* ---------- home photo marquee: built only when scrolled into view ---------- */
+(function(){
+  var wrap=document.getElementById('pstrip'),track=document.getElementById('pstripTrack');
+  if(!wrap||!track)return;
+  var people=DATA.lecturers.filter(function(l){return l.img;});
+  if(!people.length){wrap.style.display='none';return;}
+  var built=false;
+  function build(){
+    if(built)return;built=true;
+    track.innerHTML=people.map(function(l){
+      return '<a class="pcard" href="#'+LPREFIX+esc(l.slug)+'" title="'+esc(l.name)+'">'
+        +'<span class="pph"><img loading="lazy" decoding="async" width="480" height="480" src="'
+        +IMG+l.img+'_t.jpg" alt="'+esc(l.name)+'"></span>'
+        +'<span class="pnm">'+esc(l.name)+'</span></a>';
+    }).join('');
+    var clone=track.cloneNode(true),kids=clone.children,k;
+    for(k=0;k<kids.length;k++){kids[k].setAttribute('aria-hidden','true');kids[k].setAttribute('tabindex','-1');}
+    while(clone.firstChild)track.appendChild(clone.firstChild);
+    track.style.animationDuration=(people.length*3)+'s';
+  }
+  var btn=document.getElementById('pstripPlay');
+  if(btn)btn.addEventListener('click',function(){
+    var off=wrap.classList.toggle('paused');
+    btn.setAttribute('aria-pressed',off?'true':'false');
+    var lbl=(off?'Resume':'Pause')+' the photo strip';
+    btn.setAttribute('aria-label',lbl);btn.setAttribute('title',lbl);
+  });
+  var c=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
+  if(c&&(c.saveData===true||/^(slow-)?2g$/.test(c.effectiveType||''))){wrap.style.display='none';return;}
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      for(var i=0;i<es.length;i++){
+        if(es[i].isIntersecting){build();wrap.classList.remove('offscreen');}
+        else{wrap.classList.add('offscreen');}
+      }
+    },{rootMargin:'400px 0px'}).observe(wrap);
+  }else{build();}
+})();
+
 /* ================= faculty ================= */
 let fFilter='all', fq='';
 function cardHTML(l,i){
@@ -1558,7 +1657,7 @@ var REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce
 function armReveal(){}
 if(!REDUCED&&'IntersectionObserver'in window){
   document.body.classList.add('anim');
-  var SEL='.stat,.card,.mod,.ms,.panel,.person,.contact,.obj,.mod2wrap,.ia-mine,.ia-sec,.ia-card,.prov';
+  var SEL='.stat,.card,.mod,.ms,.panel,.person,.contact,.obj,.mod2wrap,.ia-mine,.ia-sec,.ia-card,.prov,.pstrip';
   var io=new IntersectionObserver(function(ents){
     ents.forEach(function(e){
       if(!e.isIntersecting)return;

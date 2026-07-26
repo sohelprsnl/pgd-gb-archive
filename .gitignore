@@ -9,3 +9,7 @@ _data.json
 
 # zip packages built for upload, not part of the site
 _deploy/
+
+# working copies, not part of the published site
+archive-v2.html
+GO-LIVE-archive-v2.md
