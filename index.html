@@ -608,6 +608,16 @@ table.sch tbody tr:hover td{background:var(--accent-soft)}
 .ia-card span{display:block;color:var(--slate);font-size:var(--fs-xs);line-height:1.5}
 .ia-tag{color:var(--accent-ink)!important;font-weight:700;font-size:10px!important;
   text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+.ia-dl{display:inline-flex!important;align-items:center;gap:6px;margin-top:10px;
+  font-family:var(--disp);font-size:11px;font-weight:700;letter-spacing:.03em;
+  color:var(--accent-ink)!important;text-decoration:none;
+  background:var(--accent-soft);border:1px solid var(--accent-edge);border-radius:var(--r1);
+  padding:6px 10px;line-height:1;
+  transition:background var(--dur-base),color var(--dur-base),border-color var(--dur-base)}
+.ia-dl svg{flex:none}
+.ia-dl em{font-style:normal;font-weight:600;opacity:.72;font-size:10px}
+.ia-dl:hover,.ia-dl:focus-visible{background:var(--accent-fill);border-color:var(--accent-fill);color:#fff!important}
+@media print{.ia-dl{display:none!important}}
 .ia-sub{color:var(--slate);font-size:var(--fs-sm);margin-bottom:var(--s3);max-width:var(--measure)}
 .ia-ph{font-size:10px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.08em;
   margin-bottom:var(--s3);padding-bottom:var(--s2);border-bottom:2px solid var(--accent-fill)}
@@ -1117,14 +1127,16 @@ body.anim .rv-in{opacity:1;transform:none;
 
     <section class="ia-sec">
       <h3>Forms &amp; guidelines</h3>
+      <p class="ia-sub">Blank templates in the format IBA accepts. Download, print, fill and get them signed.</p>
       <ul class="ia-grid">
-        <li class="ia-card"><span class="ia-ico" aria-hidden="true">C</span><span class="ia-cbody"><b>Consent Form (Report Submission Form)</b><span>Signed by the intern and the academic supervisor.</span></span></li>
-        <li class="ia-card"><span class="ia-ico" aria-hidden="true">A</span><span class="ia-cbody"><b>Daily Activities Sheet Summary</b><span>Minimum 24 days. Signed by the student and the industry supervisor.</span></span></li>
-        <li class="ia-card"><span class="ia-ico" aria-hidden="true">E</span><span class="ia-cbody"><b>Intern Evaluation Form</b><span>Filled by the industry supervisor.</span><span class="ia-tag">Signature + company seal</span></span></li>
-        <li class="ia-card"><span class="ia-ico" aria-hidden="true">M</span><span class="ia-cbody"><b>Meeting Signature Sheet</b><span>Student, academic supervisor (min 4 signs), industry supervisor (min 24 signs).</span></span></li>
-        <li class="ia-card"><span class="ia-ico" aria-hidden="true">N</span><span class="ia-cbody"><b>Physical Notebook / Diary</b><span>Name, ID, Batch and topic on front. Daily activities written in detail.</span></span></li>
-        <li class="ia-card"><span class="ia-ico" aria-hidden="true">G</span><span class="ia-cbody"><b>Industry Attachment Guideline</b><span>Topic, report body, plagiarism rule and defense guideline.</span></span></li>
+        <li class="ia-card"><span class="ia-ico" aria-hidden="true">C</span><span class="ia-cbody"><b>Consent Form (Report Submission Form)</b><span>Signed by the intern and the academic supervisor.</span><a class="ia-dl" href="forms/consent-form-report-submission-declaration.docx" download><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7.5 11 4.5 4.5L16.5 11"/><path d="M4 19h16"/></svg>Download <em>DOCX &middot; 13 KB</em></a></span></li>
+        <li class="ia-card"><span class="ia-ico" aria-hidden="true">A</span><span class="ia-cbody"><b>Daily Activities Sheet Summary</b><span>Minimum 24 days. Signed by the student and the industry supervisor.</span><a class="ia-dl" href="forms/daily-activities-sheet-notebook.xlsx" download><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7.5 11 4.5 4.5L16.5 11"/><path d="M4 19h16"/></svg>Download <em>XLSX &middot; 11 KB</em></a></span></li>
+        <li class="ia-card"><span class="ia-ico" aria-hidden="true">E</span><span class="ia-cbody"><b>Intern Evaluation Form</b><span>Filled by the industry supervisor.</span><span class="ia-tag">Signature + company seal &middot; handwritten original only</span><a class="ia-dl" href="forms/intern-evaluation-form.pdf" download><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7.5 11 4.5 4.5L16.5 11"/><path d="M4 19h16"/></svg>Download <em>PDF &middot; 529 KB</em></a></span></li>
+        <li class="ia-card"><span class="ia-ico" aria-hidden="true">M</span><span class="ia-cbody"><b>Meeting Signature Sheet</b><span>Student, academic supervisor (min 4 signs), industry supervisor (min 24 signs).</span><span class="ia-tag">Handwritten original only</span><a class="ia-dl" href="forms/meeting-signature-sheet.pdf" download><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7.5 11 4.5 4.5L16.5 11"/><path d="M4 19h16"/></svg>Download <em>PDF &middot; 380 KB</em></a></span></li>
+        <li class="ia-card"><span class="ia-ico" aria-hidden="true">N</span><span class="ia-cbody"><b>Physical Notebook / Diary</b><span>Name, ID, Batch and topic on front. Daily activities written in detail.</span><span class="ia-tag">Collect notebook / diary &middot; SICIP office</span></span></li>
+        <li class="ia-card"><span class="ia-ico" aria-hidden="true">G</span><span class="ia-cbody"><b>Industry Attachment Guideline</b><span>Topic, report body, plagiarism rule and defense guideline.</span><span class="ia-tag">A guideline by an intern, with the physical documents</span><a class="ia-dl" href="forms/industry-attachment-guidelines.pdf" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Open <em>PDF &middot; 9.8 MB</em></a></span></li>
       </ul>
+      <p class="ia-note">These are the blank forms only. The Intern Evaluation Form and the Meeting Signature Sheet must be filled by hand. Typed or printed-answer copies are not accepted.</p>
     </section>
 
     <section class="ia-sec">
