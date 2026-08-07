@@ -25,7 +25,7 @@
   ============================================================================
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -34,7 +34,7 @@
 <meta name="author" content="Md. Sohel Rana">
 <link rel="canonical" href="https://sohelprsnl.com/pgd-gb-archive/">
 
-<meta name="theme-color" content="#F4F6FA">
+<meta name="theme-color" content="#0B1233">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="images/icon-512.png">
 <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png">
@@ -152,15 +152,15 @@
   0%{transform:translateX(-140%) skewX(-20deg)}
   60%,100%{transform:translateX(240%) skewX(-20deg)}
 }
-.stat,.panel,.ia-mine,.ltile,.obj,.ms,.mod,.rdisc,.person,
+.stat,.panel,.ia-mine,.ltile,.obj,.ms,.mod,.rdisc,.person,.rescard,
 .card,.ia-card,.btn,.chip,.plinks a{position:relative;overflow:hidden}
 .stat::after,.panel::after,.ia-mine::after,.ltile::after,.obj::after,.ms::after,.mod::after,
-.rdisc::after,.person::after,.card::after,.ia-card::after,.btn::after,.chip::after,.plinks a::after{
+.rdisc::after,.person::after,.rescard::after,.card::after,.ia-card::after,.btn::after,.chip::after,.plinks a::after{
   content:"";position:absolute;top:-20%;bottom:-20%;left:0;width:36%;z-index:2;pointer-events:none;
   background:linear-gradient(100deg,transparent 0%,var(--sheen) 42%,var(--sheen) 58%,transparent 100%);
   transform:translateX(-140%) skewX(-20deg)}
 /* dark blocks need a light band, not the orange one */
-.ia-mine::after,.plinks a::after,.btn:not(.ghost)::after{
+.plinks a::after,.btn:not(.ghost)::after{
   background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.24) 42%,rgba(255,255,255,.24) 58%,transparent 100%)}
 /* in dark mode the solid buttons flip to near-white, so the band flips back to dark */
 :root[data-theme=dark] .btn:not(.ghost):not(.accent)::after,
@@ -168,7 +168,7 @@
   background:linear-gradient(100deg,transparent 0%,rgba(11,18,51,.26) 42%,rgba(11,18,51,.26) 58%,transparent 100%)}
 /* --- always sweeping, staggered so no two fire together --- */
 .stat::after,.panel::after,.ia-mine::after,.ltile::after,.obj::after,
-.ms::after,.mod::after,.rdisc::after,.person::after{animation:cardShine 6s var(--ease) infinite}
+.ms::after,.mod::after,.rdisc::after,.person::after,.rescard::after{animation:cardShine 6s var(--ease) infinite}
 .stat:nth-child(2)::after{animation-delay:.5s}
 .stat:nth-child(3)::after{animation-delay:1s}
 .stat:nth-child(4)::after{animation-delay:1.5s}
@@ -192,7 +192,8 @@
 .mod::after{animation-delay:.6s}
 .mod:nth-child(2)::after{animation-delay:1.4s}
 .mod:nth-child(3)::after{animation-delay:2.2s}
-.rdisc::after,.person::after{animation-delay:1s}
+.rescard::after{animation-delay:.4s}
+.rdisc::after,.person::after{animation-delay:1.6s}
 /* --- sweeps once, on pointer or keyboard focus --- */
 @media(hover:hover){
   .card:hover::after,.ia-card:hover::after,.btn:hover::after,
@@ -202,20 +203,21 @@
 .chip:focus-visible::after,.plinks a:focus-visible::after{animation:cardShine 1.1s var(--ease)}
 @media(prefers-reduced-motion:reduce){
   .stat::after,.panel::after,.ia-mine::after,.ltile::after,.obj::after,.ms::after,.mod::after,
-  .rdisc::after,.person::after,.card::after,.ia-card::after,.btn::after,.chip::after,
-  .plinks a::after{display:none!important}
+  .rdisc::after,.person::after,.rescard::after,.card::after,.ia-card::after,.btn::after,
+  .chip::after,.plinks a::after{display:none!important}
 }
 @media print{
   .stat::after,.panel::after,.ia-mine::after,.ltile::after,.obj::after,.ms::after,.mod::after,
-  .rdisc::after,.person::after,.card::after,.ia-card::after,.btn::after,.chip::after,
-  .plinks a::after{display:none!important}
+  .rdisc::after,.person::after,.rescard::after,.card::after,.ia-card::after,.btn::after,
+  .chip::after,.plinks a::after{display:none!important}
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-padding-top:calc(var(--hdr) + var(--s4));-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);
-  -webkit-tap-highlight-color:rgba(244,106,27,.18);
+  -webkit-tap-highlight-color:rgba(244,106,27,.18);overflow-x:hidden;
   font-size:var(--fs-base);line-height:1.6;font-variant-numeric:tabular-nums;
   transition:background var(--dur-base),color var(--dur-base)}
+a,button,select,summary,[role=button]{touch-action:manipulation}
 img{display:block;max-width:100%;height:auto}
 a{color:var(--ink);text-decoration:none}
 h1,h2,h3,h4{margin:0;line-height:1.2;text-wrap:balance;font-family:var(--disp);letter-spacing:-.015em}
@@ -320,7 +322,7 @@ main{padding-bottom:var(--s8)}
 /* heading left, its one-line summary right, same row: removes the blank strip beside every title */
 .sechead{display:flex;align-items:flex-end;justify-content:space-between;
   gap:var(--s2) var(--s6);flex-wrap:wrap;margin-bottom:var(--s5)}
-#results .sechead{margin-bottom:var(--s4)}
+#results .sechead{margin-bottom:var(--s3)}
 .sechead .sec,.sechead h2{margin-bottom:0}
 .sechead .sub{margin:0;text-align:right;max-width:min(56ch,52%)}
 .sechead.solo{margin-bottom:var(--s4)}                  /* heading with no summary beside it */
@@ -484,7 +486,8 @@ main{padding-bottom:var(--s8)}
 .card:hover{border-color:var(--accent-fill);box-shadow:var(--e2);transform:translateY(-2px)}
 .card .ph{position:relative;display:block;height:0;padding-top:100%;background:#DCE3EE;overflow:hidden}
 @supports(aspect-ratio:1/1){.card .ph{height:auto;padding-top:0;aspect-ratio:1/1}}
-#faculty.pagepad,#results.pagepad{padding-top:var(--s5)}
+#faculty.pagepad{padding-top:var(--s5)}
+#results.pagepad{padding-top:var(--s4)}
 .card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .card .av{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
   font-family:var(--disp);font-size:44px;font-weight:700;color:#fff;
@@ -554,6 +557,18 @@ main{padding-bottom:var(--s8)}
 .st-list{margin:var(--s2) 0 0}
 .st{font-size:var(--fs-xs);color:var(--slate);padding:5px 0;border-top:1px dashed var(--line)}
 .rescta{margin:0 0 var(--s4)}
+/* results: the note and the call to action share one card, pulling the disclaimer up */
+.rescard{display:flex;align-items:center;justify-content:space-between;gap:var(--s3) var(--s5);
+  flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:var(--r3);
+  padding:var(--s4) var(--s5);box-shadow:var(--e1);margin:0 0 var(--s3)}
+.rescard p{margin:0;font-size:var(--fs-body);color:var(--slate);max-width:none;min-width:0}
+.rescard .btn{flex:none}
+/* wide enough for the whole sentence on one line, so do not let it wrap */
+@media(min-width:1080px){.rescard p{white-space:nowrap}}
+@media(max-width:640px){
+  .rescard{flex-direction:column;align-items:stretch;padding:var(--s4)}
+  .rescard .btn{justify-content:center}
+}
 /* results disclaimer: visible, not hidden behind a toggle, capped to a readable measure */
 .rdisc{margin-top:0;padding:14px 20px;background:var(--surface);
   border:1px solid var(--line);border-left:3px solid var(--accent-fill);border-radius:var(--r2)}
@@ -649,28 +664,23 @@ table.sch tbody tr:hover td{background:var(--accent-soft)}
 /* ---------- industry attachment ---------- */
 .ia-head h2{font-size:var(--fs-xl)}
 .ia-mine{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4) var(--s6);align-items:start;
-  background:linear-gradient(135deg,#0B0F19,#1B2233);color:#fff;border-radius:var(--r3);
-  padding:var(--s4) var(--s5);margin:0 0 var(--s6);box-shadow:var(--e2)}
-:root[data-theme=dark] .ia-mine{background:var(--surface);border:1px solid var(--line)}
+  background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r3);
+  padding:var(--s4) var(--s5);margin:0 0 var(--s6);box-shadow:var(--e1)}
 .ia-mine-row{display:flex;flex-direction:column;gap:2px;padding:0;border-bottom:0;min-width:0}
 /* Below 1040px the two columns are too narrow to hold
    "Mohammad Saif Noman Khan, Associate Professor" on one row, so stack them. */
 @media(max-width:1040px){.ia-mine{grid-template-columns:1fr}}
 
 .ia-mine-k{width:auto;font-size:var(--fs-badge);text-transform:uppercase;letter-spacing:.05em;
-  color:var(--accent-fill);font-weight:700;line-height:1.25}
-.ia-mine-v{margin:0;font-size:var(--fs-base);line-height:1.55;color:#fff;max-width:var(--measure)}
-:root[data-theme=dark] .ia-mine-v{color:var(--ink)}
-.ia-mine-v em{display:block;font-style:normal;font-size:var(--fs-sm);color:#B6BCC4;margin-top:5px;line-height:1.45}
+  color:var(--accent-ink);font-weight:700;line-height:1.25;margin-bottom:var(--s2)}
+.ia-mine-v{margin:0;font-size:var(--fs-base);line-height:1.55;color:var(--ink);max-width:var(--measure)}
+.ia-mine-v em{display:block;font-style:normal;font-size:var(--fs-sm);color:var(--slate);margin-top:5px;line-height:1.45}
 .ia-by{display:block;margin:0 0 4px;font-size:var(--fs-base);font-weight:600}
 .ia-topic{display:block}
-.ia-by a{color:#fff;text-decoration:underline;text-underline-offset:3px}
-.ia-by a:hover{color:var(--accent-fill)}
-:root[data-theme=dark] .ia-by a{color:var(--ink)}
-:root[data-theme=dark] .ia-by a:hover{color:var(--accent-ink)}
-.ia-mine-v a{color:#fff;text-decoration:underline;text-underline-offset:3px}
-:root[data-theme=dark] .ia-mine-v a{color:var(--accent-ink)}
-.ia-mine-v a:hover{color:var(--accent-fill)}
+.ia-by a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.ia-by a:hover{color:var(--accent-ink)}
+.ia-mine-v a{color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px}
+.ia-mine-v a:hover{color:var(--ink)}
 .ia-two{display:grid;grid-template-columns:1fr 1fr;gap:var(--s6);align-items:start}
 .ia-sec{margin-bottom:var(--s7)}
 .ia-sec>h3{display:flex;align-items:center;gap:var(--s2);font-size:var(--fs-lg);margin-bottom:var(--s4)}
@@ -853,7 +863,7 @@ body.anim .rv-in{opacity:1;transform:none;
   .ltile:hover,.ms:hover,.ia-card:hover,.person:hover,.mod:hover{transform:none}
   /* single row on desktop; on a phone the header may wrap so the table need not scroll */
   .m2t thead th,.m2t th.c{white-space:normal}
-  .ia-mine{gap:0}
+  .ia-mine{gap:var(--s4)}
   .herowrap{padding:var(--s7) 0 var(--s6)}
   .search input,.fsel{font-size:16px}
   .fsel{max-width:none;flex:1 1 45%}
@@ -1346,11 +1356,13 @@ body.anim .rv-in{opacity:1;transform:none;
   </div></section>
 
   <section class="page pagepad" id="results"><div class="wrap">
-    <div class="sechead">
+    <div class="sechead solo">
       <h2 class="sec">Results</h2>
-      <p class="sub">Batch 11 results, compiled and published here by a classmate. Not an official IBA or SICIP release.</p>
     </div>
-    <p class="rescta"><a class="btn accent" href="https://sohelprsnl.com/pgd-gb-results/" target="_blank" rel="noopener">Check Results &#8599;</a></p>
+    <div class="rescard">
+      <p>Batch 11 results, compiled and published here by a classmate. Not an official IBA or SICIP release.</p>
+      <a class="btn accent" href="https://sohelprsnl.com/pgd-gb-results/" target="_blank" rel="noopener">Check Results &#8599;</a>
+    </div>
     <section class="rdisc" aria-labelledby="rdiscH">
       <h3 class="rdisc-h" id="rdiscH">Disclaimer</h3>
       <p>The information published on this page has been compiled from materials shared in the official SICIP WhatsApp group, including PDF copies of examination results and ID card images. It is provided solely for the convenience of students and participants.</p><p>This website is independently maintained and is not an official SICIP website. The SICIP Office and its team have no involvement in the preparation, verification, maintenance, or publication of the information available on this page and should not be held responsible for any errors, omissions, or discrepancies.</p><p>Although every effort has been made to ensure accuracy, mistakes or outdated information may occasionally occur. If you notice any incorrect, missing, or inconsistent information, please contact me directly via WhatsApp or email. I will review the information and update it as soon as possible.</p><p>To avoid unnecessary confusion, please do not raise website-related correction requests in the official SICIP WhatsApp group. Instead, kindly contact me directly via WhatsApp or email.</p><p>Thank you for your understanding and cooperation.</p>
@@ -1837,7 +1849,7 @@ function closeNav(){var n=document.getElementById('nav'),t=document.getElementBy
     if(m)m.setAttribute('content',t==='dark'?'#0B1233':'#F4F6FA');
   }
   var stored=null; try{stored=localStorage.getItem('pgdgb-theme');}catch(e){}
-  apply(stored||(window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));
+  apply(stored||'dark');   /* dark is the default; a saved choice still wins */
   b.addEventListener('click',function(){
     var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
     apply(t); try{localStorage.setItem('pgdgb-theme',t);}catch(e){}
