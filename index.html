@@ -767,8 +767,10 @@ table.sch tbody tr:hover td{background:var(--accent-soft)}
   transition:border-color var(--dur-base),box-shadow var(--dur-base)}
 .ia-av:hover{border-color:var(--accent-fill);box-shadow:var(--e2)}
 .ia-av img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block}
-/* the DU photo is near-square and his face sits right of centre, so shift the crop */
-.ia-av-snk img{object-position:57% 42%}
+/* the DU photo is 296x310, near-square, and his head sits at about x=173 of 296.
+   cover scales it to height, so only ~24px of width is croppable. centring the face
+   needs the crop pushed most of the way right. vertical value is inert here. */
+.ia-av-snk img{object-position:86% 50%}
 @media(max-width:640px){.ia-av{width:72px;height:96px}}
 .ia-mine-v em{display:block;font-style:normal;font-size:var(--fs-sm);color:var(--slate);margin-top:5px;line-height:1.45}
 .ia-by{display:block;margin:0 0 var(--s3);font-size:var(--fs-base);font-weight:600}
