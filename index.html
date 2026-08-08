@@ -89,6 +89,7 @@
   --tint-2:#F4F6F8;                /* table head, emphasis surface       */
   --accent-edge:#F9C9A8;           /* 30% accent edge, opaque equivalent */
   --sheen:rgba(244,106,27,.15);    /* moving highlight band on cards */
+  --nav-hi:#F46A1B;                /* bright band inside the footer nav labels */
   --ink-page:#14204A;              /* text sitting on the tinted page, 14.9:1 */
   --slate-page:#48557A;            /* muted text on the tinted page,   7.1:1  */
 
@@ -140,6 +141,7 @@
   --tint-2:#1B2660;
   --accent-edge:#4A3520;
   --sheen:rgba(255,255,255,.13);
+  --nav-hi:#FBBF24;
   --ink-page:var(--ink); --slate-page:var(--slate);   /* dark mode keeps one ink */
 }
 
@@ -152,10 +154,10 @@
   0%{transform:translateX(-140%) skewX(-20deg)}
   60%,100%{transform:translateX(240%) skewX(-20deg)}
 }
-.stat,.panel,.ia-mine,.ltile,.obj,.ms,.mod,.rdisc,.person,.rescard,
-.card,.ia-card,.btn,.chip,.plinks a{position:relative;overflow:hidden}
+.stat,.panel,.ia-mine,.ltile,.obj,.ms,.mod,.rdisc,.person,.contact,.rescard,.fcard,.imgcard,
+.card,.ia-card,.btn,.chip,.plinks a,.fnav a,.doccard{position:relative;overflow:hidden}
 .stat::after,.panel::after,.ia-mine::after,.ltile::after,.obj::after,.ms::after,.mod::after,
-.rdisc::after,.person::after,.rescard::after,.card::after,.ia-card::after,.btn::after,.chip::after,.plinks a::after{
+.rdisc::after,.person::after,.contact::after,.rescard::after,.fcard::after,.imgcard::after,.card::after,.ia-card::after,.btn::after,.chip::after,.plinks a::after,.fnav a::after,.doccard::after{
   content:"";position:absolute;top:-20%;bottom:-20%;left:0;width:36%;z-index:2;pointer-events:none;
   background:linear-gradient(100deg,transparent 0%,var(--sheen) 42%,var(--sheen) 58%,transparent 100%);
   transform:translateX(-140%) skewX(-20deg)}
@@ -168,7 +170,24 @@
   background:linear-gradient(100deg,transparent 0%,rgba(11,18,51,.26) 42%,rgba(11,18,51,.26) 58%,transparent 100%)}
 /* --- always sweeping, staggered so no two fire together --- */
 .stat::after,.panel::after,.ia-mine::after,.ltile::after,.obj::after,
-.ms::after,.mod::after,.rdisc::after,.person::after,.rescard::after{animation:cardShine 6s var(--ease) infinite}
+.ms::after,.mod::after,.rdisc::after,.person::after,.contact::after,.rescard::after,
+.fcard::after,.imgcard::after,.doccard::after{animation:cardShine 6s var(--ease) infinite}
+/* the two contact cards sweep in sequence, not together */
+.contact::after{animation-delay:.6s}
+/* the nine footer nav chips sweep left to right, one after another */
+.fnav a::after{animation:cardShine 6s var(--ease) infinite}
+.fnav a:nth-child(2)::after,.fnav a:nth-child(2) span{animation-delay:.35s}
+.fnav a:nth-child(3)::after,.fnav a:nth-child(3) span{animation-delay:.7s}
+.fnav a:nth-child(4)::after,.fnav a:nth-child(4) span{animation-delay:1.05s}
+.fnav a:nth-child(5)::after,.fnav a:nth-child(5) span{animation-delay:1.4s}
+.fnav a:nth-child(6)::after,.fnav a:nth-child(6) span{animation-delay:1.75s}
+.fnav a:nth-child(7)::after,.fnav a:nth-child(7) span{animation-delay:2.1s}
+.fnav a:nth-child(8)::after,.fnav a:nth-child(8) span{animation-delay:2.45s}
+.fnav a:nth-child(9)::after,.fnav a:nth-child(9) span{animation-delay:2.8s}
+/* the three footer cards sweep in sequence, not together */
+.fcard:nth-child(1)::after{animation-delay:0s}
+.fcard:nth-child(2)::after{animation-delay:.5s}
+.fcard:nth-child(3)::after{animation-delay:1s}
 .stat:nth-child(2)::after{animation-delay:.5s}
 .stat:nth-child(3)::after{animation-delay:1s}
 .stat:nth-child(4)::after{animation-delay:1.5s}
@@ -200,16 +219,25 @@
   .chip:hover::after,.plinks a:hover::after{animation:cardShine 1.1s var(--ease)}
 }
 .card:focus-visible::after,.ia-card:focus-visible::after,.btn:focus-visible::after,
-.chip:focus-visible::after,.plinks a:focus-visible::after{animation:cardShine 1.1s var(--ease)}
+.chip:focus-visible::after,.plinks a:focus-visible::after,.fnav a:focus-visible::after{animation:cardShine 1.1s var(--ease)}
 @media(prefers-reduced-motion:reduce){
   .stat::after,.panel::after,.ia-mine::after,.ltile::after,.obj::after,.ms::after,.mod::after,
-  .rdisc::after,.person::after,.rescard::after,.card::after,.ia-card::after,.btn::after,
-  .chip::after,.plinks a::after{display:none!important}
+  .rdisc::after,.person::after,.contact::after,.rescard::after,.fcard::after,.imgcard::after,.card::after,.ia-card::after,.btn::after,
+  .chip::after,.plinks a::after,.fnav a::after,.doccard::after{display:none!important}
+  .doccard::before,.ia-card::before,.ia-panel::before{animation:none!important;
+    background:var(--accent-fill)!important}
+  .fnav a span{background-image:none!important;-webkit-text-fill-color:var(--slate)!important}
+  .tsweep,.tsweep-once{background-image:none!important;-webkit-text-fill-color:currentColor!important;
+    animation:none!important}
 }
 @media print{
+  .doccard::before,.ia-card::before,.ia-panel::before{display:none!important}
   .stat::after,.panel::after,.ia-mine::after,.ltile::after,.obj::after,.ms::after,.mod::after,
-  .rdisc::after,.person::after,.rescard::after,.card::after,.ia-card::after,.btn::after,
-  .chip::after,.plinks a::after{display:none!important}
+  .rdisc::after,.person::after,.contact::after,.rescard::after,.fcard::after,.imgcard::after,.card::after,.ia-card::after,.btn::after,
+  .chip::after,.plinks a::after,.fnav a::after,.doccard::after{display:none!important}
+  .fnav a span{background-image:none!important;-webkit-text-fill-color:var(--slate)!important}
+  .tsweep,.tsweep-once{background-image:none!important;-webkit-text-fill-color:currentColor!important;
+    animation:none!important}
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-padding-top:calc(var(--hdr) + var(--s4));-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -243,7 +271,7 @@ button{font:inherit;color:inherit}
   font-size:var(--fs-brand);font-weight:600;letter-spacing:-.015em}
 .brand .hlogo{height:var(--brand-mark);width:auto;background:#fff;border-radius:7px;padding:3px;flex:none}
 .brand .btxt{display:flex;flex-direction:column;line-height:1.15;min-width:0;white-space:nowrap}
-.brand .btxt span{font-family:var(--sans);font-size:var(--fs-brand-sub);font-weight:500;color:var(--slate);
+.brand .btxt .btxt-s{font-family:var(--sans);font-size:var(--fs-brand-sub);font-weight:500;color:var(--slate);
   letter-spacing:.05em;text-transform:uppercase}
 .dia{width:9px;height:9px;background:var(--accent-fill);transform:rotate(45deg);border-radius:1px;flex:none}
 nav.main{margin-left:auto;display:flex;gap:2px;align-items:center;flex-wrap:nowrap}
@@ -579,6 +607,20 @@ main{padding-bottom:var(--s8)}
 .rdisc p:last-child{margin-bottom:0}
 @media(max-width:640px){.rdisc{padding:var(--s3) var(--s4)}}
 
+/* ---------- image cards (banner + caption bar, whole card is one link) ---------- */
+.imgcard{display:block;background:var(--surface);border:1px solid var(--line);border-radius:var(--r3);
+  overflow:hidden;box-shadow:var(--e1);margin:0 0 var(--s4);
+  transition:box-shadow var(--dur-base),transform var(--dur-base),border-color var(--dur-base)}
+.imgcard:hover{box-shadow:var(--e2);transform:translateY(-2px);border-color:var(--accent-edge,var(--line))}
+.imgcard img{display:block;width:100%;height:auto}
+.imgcard-bar{display:flex;align-items:center;justify-content:space-between;gap:var(--s3) var(--s5);
+  flex-wrap:wrap;padding:var(--s3) var(--s5);border-top:1px solid var(--line)}
+.imgcard-t{font-weight:600;font-size:var(--fs-sm);color:var(--ink)}
+.imgcard-a{font-size:var(--fs-sm);font-weight:600;color:var(--accent-ink);display:inline-flex;align-items:center;gap:4px}
+.imgcard.rescheck{max-width:520px}
+@media(max-width:640px){.imgcard-bar{padding:var(--s3) var(--s4)}}
+@media(prefers-reduced-motion:reduce){.imgcard,.imgcard:hover{transform:none;transition:none}}
+
 
 /* ---------- buttons ---------- */
 .btn{display:inline-flex;align-items:center;gap:var(--s2);background:var(--btn-fill);color:var(--btn-text);
@@ -631,11 +673,53 @@ table.sch tbody tr:hover td{background:var(--accent-soft)}
 
 /* ---------- pdf ---------- */
 .pdfbar{display:flex;gap:var(--s2);margin-bottom:var(--s4);flex-wrap:wrap}
+/* the curriculum file as one small card: what it is, then what you can do with it */
+.doccard{display:flex;align-items:center;gap:var(--s3) var(--s4);flex-wrap:wrap;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r3);
+  padding:var(--s3) var(--s4);box-shadow:var(--e1);margin:0 0 var(--s4)}
+.doc-ic{flex:none;width:38px;height:38px;border-radius:var(--r1);background:var(--accent-soft);
+  color:var(--accent-ink);border:1px solid var(--accent-edge);
+  display:flex;align-items:center;justify-content:center}
+.doc-t{flex:1 1 240px;min-width:0}
+.doc-h{font-size:var(--fs-sm);font-weight:600;color:var(--ink);margin:0}
+.doc-m{font-size:10px;font-weight:700;color:var(--slate);text-transform:uppercase;
+  letter-spacing:.07em;margin:3px 0 0}
+.doccard .pdfbar{margin:0;flex:none}
+/* a colour bar drifts along the top edge, so the card reads as live, not flat */
+@keyframes docBar{from{background-position:0% 50%}to{background-position:200% 50%}}
+.doccard::before,.ia-card::before,.ia-panel::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;z-index:3;
+  pointer-events:none;
+  background:linear-gradient(90deg,var(--line) 0%,var(--accent-fill) 25%,var(--nav-hi) 50%,
+    var(--accent-fill) 75%,var(--line) 100%);
+  background-size:200% 100%;animation:docBar 6s linear infinite}
+/* negative delays so each bar starts mid-cycle, no row of bars marching in lockstep */
+.ia-grid .ia-card:nth-child(2)::before,.ia-grid .ia-panel:nth-child(2)::before{animation-delay:-1s}
+.ia-grid .ia-card:nth-child(3)::before{animation-delay:-2s}
+.ia-grid .ia-card:nth-child(4)::before{animation-delay:-3s}
+.ia-grid .ia-card:nth-child(5)::before{animation-delay:-4s}
+.ia-grid .ia-card:nth-child(6)::before{animation-delay:-5s}
+@media(max-width:640px){
+  .doccard{padding:var(--s3)}
+  .doccard .pdfbar{flex:1 1 100%}
+  .doccard .pdfbar .btn{flex:1 1 auto;justify-content:center}
+}
 .pdfbox{background:var(--surface);border:1px solid var(--line);border-radius:var(--r3);overflow:hidden;box-shadow:var(--e1)}
 .pdfbox iframe{width:100%;height:78vh;height:78dvh;border:0;display:block;background:#fff}
 
 /* ---------- contact ---------- */
 .contact-grid{display:grid;grid-template-columns:1.9fr 1fr;gap:var(--s5);align-items:start}
+/* each column gets its own label on top, same style as the .ia-ph phase labels */
+.ccol{min-width:0}
+.ccol-h{font-size:10px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.08em;
+  margin:0 0 var(--s3);padding-bottom:var(--s2);border-bottom:2px solid var(--accent-fill)}
+/* contact sits higher up the page so both cards land in the first screen */
+#contact.pagepad{padding-top:var(--s5)}
+#contact .sechead.solo{margin-bottom:var(--s3)}
+#contact .ccol-h{margin-bottom:var(--s2);padding-bottom:6px}
+#contact .person,#contact .contact{padding:var(--s4)}
+#contact .pbio{margin-bottom:var(--s3)}
+#contact .contact-grid{gap:var(--s4)}
 .person{background:var(--surface);border:1px solid var(--line);border-radius:var(--r3);padding:var(--s5);
   display:grid;grid-template-columns:150px 1fr;gap:var(--s5);box-shadow:var(--e1);
   transition:box-shadow var(--dur-base)}
@@ -672,13 +756,23 @@ table.sch tbody tr:hover td{background:var(--accent-soft)}
 @media(max-width:1040px){.ia-mine{grid-template-columns:1fr}}
 
 .ia-mine-k{width:auto;font-size:var(--fs-badge);text-transform:uppercase;letter-spacing:.05em;
-  color:var(--accent-ink);font-weight:700;line-height:1.25;margin-bottom:var(--s2)}
-.ia-mine-v{margin:0;font-size:var(--fs-base);line-height:1.55;color:var(--ink);max-width:var(--measure)}
+  color:var(--accent-ink);font-weight:700;line-height:1.25;margin-bottom:var(--s3)}
+.ia-mine-v{margin:0;font-size:var(--fs-base);line-height:1.55;color:var(--ink);max-width:var(--measure);
+  display:flex;gap:var(--s3);align-items:flex-start}
+.ia-mine-t{min-width:0}
+/* the portrait repeats the name's link, so it is hidden from screen readers and skipped by tab */
+.ia-av{flex:none;display:block;width:52px;height:52px;border-radius:var(--rfull);overflow:hidden;
+  border:1px solid var(--line);background:var(--tint-1);
+  transition:border-color var(--dur-base),transform var(--dur-base)}
+.ia-av:hover{border-color:var(--accent-fill);transform:translateY(-1px)}
+.ia-av img{width:100%;height:100%;object-fit:cover;object-position:50% 5%;display:block}
+@media(prefers-reduced-motion:reduce){.ia-av,.ia-av:hover{transform:none;transition:none}}
+@media(max-width:640px){.ia-av{width:44px;height:44px}}
 .ia-mine-v em{display:block;font-style:normal;font-size:var(--fs-sm);color:var(--slate);margin-top:5px;line-height:1.45}
-.ia-by{display:block;margin:0 0 4px;font-size:var(--fs-base);font-weight:600}
+.ia-by{display:block;margin:0 0 var(--s3);font-size:var(--fs-base);font-weight:600}
 .ia-topic{display:block}
-.ia-by a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
-.ia-by a:hover{color:var(--accent-ink)}
+.ia-by a{color:var(--ink);text-decoration:none}
+.ia-by a:hover{color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px}
 .ia-mine-v a{color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px}
 .ia-mine-v a:hover{color:var(--ink)}
 .ia-two{display:grid;grid-template-columns:1fr 1fr;gap:var(--s6);align-items:start}
@@ -693,7 +787,7 @@ table.sch tbody tr:hover td{background:var(--accent-soft)}
 .ia-tl b{display:block;font-family:var(--disp);font-size:var(--fs-sm);color:var(--ink)}
 .ia-tl span{display:block;color:var(--slate);font-size:var(--fs-xs);margin-top:2px}
 .ia-panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r3);
-  padding:var(--s5);box-shadow:var(--e1)}
+  padding:var(--s5);box-shadow:var(--e1);position:relative;overflow:hidden}
 .ia-req ul{margin:0;padding-left:var(--s5)}
 .ia-wide .ia-req ul{columns:2;column-gap:var(--s7)}
 .ia-wide .ia-req li{break-inside:avoid}
@@ -787,17 +881,66 @@ body.noscroll{overflow:hidden}
 
 /* ---------- footer ---------- */
 .site-footer{border-top:1px solid var(--line);padding:var(--s7) 0 var(--s6);margin-top:var(--s8)}
-.fgrid{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:var(--s6)}
+.fgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4);align-items:stretch}
 .fbrand{font-family:var(--disp);font-weight:600;font-size:var(--fs-sm)}
-.fsub{font-size:var(--fs-xs);color:var(--slate);margin-top:3px}
-.fnav{display:flex;flex-direction:column;gap:6px}
-.fnav a{font-size:var(--fs-sm);color:var(--slate);transition:color var(--dur-base)}
-.fnav a:hover{color:var(--accent-ink)}
-.fdisc{font-size:var(--fs-sm);color:var(--slate);max-width:var(--measure)}
-.fcred{font-size:var(--fs-sm);color:var(--slate);margin-top:var(--s3)}
-.fcred a{color:var(--accent-ink);font-weight:600;display:inline-flex;align-items:center;gap:3px}
-.flegal{margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--line)}
-.flegal p{font-size:var(--fs-xs);color:var(--slate)}
+.fsub{font-size:var(--fs-xs);color:var(--slate);line-height:1.5;margin-top:3px}
+/* footer nav: centred chips, one line, never wraps. Narrow screens scroll sideways. */
+.fnav{display:flex;flex-wrap:nowrap;gap:7px;margin-top:var(--s4);
+  padding-top:var(--s4);border-top:1px solid var(--line);
+  justify-content:center;justify-content:safe center;
+  overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.fnav::-webkit-scrollbar{display:none}
+.fnav a{flex:none;white-space:nowrap;background:var(--surface);border:1px solid var(--line);
+  color:var(--slate);border-radius:var(--rfull);padding:6px 11px;
+  font-size:var(--fs-xs);font-weight:600;
+  transition:color var(--dur-base),border-color var(--dur-base)}
+.fnav a:hover{color:var(--accent-ink);border-color:var(--line-strong)}
+/* mid-size screens: tighten the chips rather than let the row overflow */
+@media(max-width:1023px){.fnav{gap:6px}.fnav a{padding:6px 9px;font-size:11.5px}}
+/* a bright band travels through the label itself, in step with the chip sweep.
+   the base stops stay solid slate, so contrast only ever goes up, never down */
+@keyframes navText{0%{background-position:100% 50%}60%,100%{background-position:0% 50%}}
+/* the wordmark itself: base stops are currentColor, so only the band adds colour.
+   hero and footer loop; the sticky header sweeps once on load, then rests. */
+@supports((-webkit-background-clip:text) or (background-clip:text)){
+  .tsweep,.tsweep-once{
+    background-image:linear-gradient(100deg,currentColor 0%,currentColor 40%,
+      var(--nav-hi) 50%,currentColor 60%,currentColor 100%);
+    background-size:260% 100%;background-position:100% 50%;background-repeat:no-repeat;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .tsweep{animation:navText 6s var(--ease) infinite}
+  .tsweep-once{animation:navText 2.4s var(--ease) .4s 1 both}
+  .ahero h1.tsweep{animation-delay:.4s}
+  .fbrand.tsweep{animation-delay:.8s}
+}
+@supports((-webkit-background-clip:text) or (background-clip:text)){
+  .fnav a span{
+    background-image:linear-gradient(100deg,var(--slate) 0%,var(--slate) 40%,
+      var(--nav-hi) 50%,var(--slate) 60%,var(--slate) 100%);
+    background-size:260% 100%;background-position:100% 50%;background-repeat:no-repeat;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    animation:navText 6s var(--ease) infinite}
+  .fnav a:hover span,.fnav a:focus-visible span{-webkit-text-fill-color:var(--accent-ink);animation:none}
+}
+.fdisc{font-size:var(--fs-xs);color:var(--slate);line-height:1.5;max-width:none}
+/* footer cards: brand, independence note and credit, three equal cards on one row */
+.fcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r3);
+  padding:var(--s4);box-shadow:var(--e1);min-width:0}
+.fcard-brand{display:flex;align-items:center;gap:var(--s3)}
+.fcard-mark{width:34px;height:34px;flex:none;object-fit:contain}
+.fdisc-h{font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.05em;
+  color:var(--accent-ink);font-weight:700;margin:0 0 6px}
+.fcard-cred{display:flex;align-items:center;gap:var(--s3);
+  transition:box-shadow var(--dur-base),border-color var(--dur-base),transform var(--dur-base)}
+.fcard-cred:hover{box-shadow:var(--e2);border-color:var(--line-strong);transform:translateY(-1px)}
+.fcred-av{width:44px;height:44px;flex:none;border-radius:var(--rfull);object-fit:cover;
+  border:1px solid var(--line)}
+.fcred-txt{display:flex;flex-direction:column;gap:1px;min-width:0}
+.fcred-k{font-size:var(--fs-xs);color:var(--slate)}
+.fcred-n{font-size:var(--fs-sm);font-weight:600;color:var(--ink)}
+.fcred-l{font-size:var(--fs-xs);font-weight:600;color:var(--accent-ink);
+  display:inline-flex;align-items:center;gap:3px}
+@media(prefers-reduced-motion:reduce){.fcard-cred,.fcard-cred:hover{transform:none;transition:none}}
 
 /* ---------- motion ---------- */
 body.anim .rv{opacity:0;transform:translateY(10px)}
@@ -834,10 +977,25 @@ body.anim .rv-in{opacity:1;transform:none;
   .modal .mwrap{grid-template-columns:1fr}
   .bigpic{width:100%;height:320px;position:static}
   .person{grid-template-columns:1fr}
-  .fgrid{grid-template-columns:1fr;gap:var(--s5)}
+  .fgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3)}
 }
 @media(max-width:640px){
   :root{--s8:56px;--s7:36px}
+  .fgrid{grid-template-columns:1fr}
+  /* phone: the chip row scrolls sideways. bigger tap targets, momentum scroll,
+     faded edges so it is obvious there is more to the right, and no page rubber-band */
+  .fnav{gap:6px;justify-content:flex-start;overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%)}
+  .fnav a{padding:9px 13px;font-size:12px;min-height:38px;display:inline-flex;align-items:center}
+  /* phone battery: background-position animations repaint every frame and there are
+     up to nine on the Industry Attachment tab. Freeze those, keep the transform-based
+     sweeps, which the GPU handles for free. */
+  .fnav a span{animation:none!important;-webkit-text-fill-color:var(--slate)!important;
+    background-image:none!important}
+  .doccard::before,.ia-card::before,.ia-panel::before{animation:none!important;
+    background-position:50% 50%!important}
   /* three tiles across is too cramped on a phone: give each a full-width row instead,
      so the logo stays large and the caption stays readable */
   .ahero-logos{flex-direction:column;flex-wrap:nowrap;gap:var(--s2)}
@@ -1027,7 +1185,7 @@ body.anim .rv-in{opacity:1;transform:none;
   <div class="wrapH">
     <a class="brand" href="#home" data-go="home">
       <img class="hlogo" src="images/logo-iba-mark.png" alt="IBA, Institute of Business Administration" width="135" height="140" decoding="async">
-      <span class="btxt">PGD-GB Programme Archive<span>IBA-SICIP &middot; Batch 11 (2025)</span></span>
+      <span class="btxt"><span class="btxt-n tsweep-once">PGD-GB Programme Archive</span><span class="btxt-s">IBA-SICIP &middot; Batch 11 (2025)</span></span>
     </a>
     <nav class="main" id="nav" aria-label="Archive sections">
       <a href="#home" data-p="home">Home</a>
@@ -1075,7 +1233,7 @@ body.anim .rv-in{opacity:1;transform:none;
             </div>
             <div class="herotext">
               <p class="ahero-badge">IBA, University of Dhaka &nbsp;&middot;&nbsp; SICIP &nbsp;&middot;&nbsp; Batch 11 &mdash; 2025</p>
-              <h1>PGD-GB Programme Archive</h1>
+              <h1 class="tsweep">PGD-GB Programme Archive</h1>
               <p class="lead">The dedicated archive of the IBA-SICIP Post Graduate Diploma in Garment Business, Batch 11 (2025). Faculty and industry mentors, the course curriculum, and the complete class schedule, preserved in one place.</p>
               <div class="herocta">
                 <a class="btn" href="#faculty" data-go="faculty">Browse faculty <svg class="ico arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="m12.5 6 6 6-6 6"/></svg></a>
@@ -1127,7 +1285,7 @@ body.anim .rv-in{opacity:1;transform:none;
     <div class="fstick">
       <div class="fhead">
         <div class="fhead-left">
-          <h2 class="sec">Faculty &amp; Guest Lecturers</h2>
+          <h2 class="sec tsweep">Faculty &amp; Guest Lecturers</h2>
           <p class="sub">Search by name, organisation or subject.</p>
         </div>
         <div class="fhead-right">
@@ -1155,7 +1313,7 @@ body.anim .rv-in{opacity:1;transform:none;
 
   <section class="page pagepad" id="curriculum"><div class="wrap">
     <div class="sechead">
-      <h2 class="sec">Modules &amp; Curriculum</h2>
+      <h2 class="sec tsweep">Modules &amp; Curriculum</h2>
       <p class="sub">Three modules &middot; 108 classes &middot; 30 credits.</p>
     </div>
     <div id="modSummary"></div>
@@ -1165,20 +1323,26 @@ body.anim .rv-in{opacity:1;transform:none;
   </div></section>
 
   <section class="page pagepad" id="coursepdf"><div class="wrap">
-    <div class="sechead">
-      <h2 class="sec">Course Curriculum</h2>
-      <p class="sub">Official programme curriculum document (SICIP-B11-2025).</p>
+    <div class="sechead solo">
+      <h2 class="sec tsweep">Course Curriculum</h2>
     </div>
-    <div class="pdfbar">
-      <a class="btn" href="curriculum.pdf" target="_blank" rel="noopener"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Open in new tab</a>
-      <a class="btn ghost" href="curriculum.pdf" download><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7.5 11 4.5 4.5L16.5 11"/><path d="M5 20h14"/></svg>Download PDF</a>
+    <div class="doccard">
+      <span class="doc-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg></span>
+      <div class="doc-t">
+        <p class="doc-h">Official programme curriculum document</p>
+        <p class="doc-m">SICIP-B11-2025 &middot; PDF</p>
+      </div>
+      <div class="pdfbar">
+        <a class="btn" href="curriculum.pdf" target="_blank" rel="noopener"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Open in new tab</a>
+        <a class="btn ghost" href="curriculum.pdf" download><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7.5 11 4.5 4.5L16.5 11"/><path d="M5 20h14"/></svg>Download PDF</a>
+      </div>
     </div>
     <div class="pdfbox"><iframe data-src="curriculum.pdf" title="Course Curriculum" loading="lazy"></iframe></div>
   </div></section>
 
   <section class="page pagepad" id="schedule"><div class="wrap">
     <div class="sechead solo">
-      <h2 class="sec">Class History</h2>
+      <h2 class="sec tsweep">Class History</h2>
     </div>
     <div class="controls">
       <div class="search">
@@ -1205,13 +1369,13 @@ body.anim .rv-in{opacity:1;transform:none;
 
   <section class="page pagepad" id="internship"><div class="wrap">
     <div class="ia-head sechead">
-      <h2>Industry Attachment &middot; Activities &middot; Report &middot; Defense</h2>
+      <h2 class="tsweep">Industry Attachment &middot; Activities &middot; Report &middot; Defense</h2>
       <p class="sub">Module-3 Internship &middot; process, requirements, forms and report format.</p>
     </div>
 
     <dl class="ia-mine">
-      <div class="ia-mine-row"><dt class="ia-mine-k">My topic</dt><dd class="ia-mine-v"><span class="ia-by"><a href="https://sohelprsnl.com" target="_blank" rel="noopener">Md. Sohel Rana</a></span> <span class="ia-topic">Sustainable and Ethical Sourcing Practices and Their Challenges in the Bangladeshi RMG Industry: A Buying / Liaison Office Perspective</span><em>An empirical study based on woven-bottoms sourcing at the LPP S.A. Bangladesh Liaison Office</em></dd></div>
-      <div class="ia-mine-row"><dt class="ia-mine-k">Academic supervisor</dt><dd class="ia-mine-v"><span class="ia-by"><a href="https://www.du.ac.bd/faculty/faculty_details/IBA/2666" target="_blank" rel="noopener">Mohammad Saif Noman Khan</a></span> <span class="ia-topic">Associate Professor,</span> <span class="ia-topic">Institute of Business Administration, University of Dhaka</span></dd></div>
+      <div class="ia-mine-row"><dt class="ia-mine-k">My topic</dt><dd class="ia-mine-v"><a class="ia-av" href="https://sohelprsnl.com" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="sohel%20atatchment%20photo.png" width="1104" height="1440" loading="lazy" decoding="async" alt=""></a><div class="ia-mine-t"><span class="ia-by"><a href="https://sohelprsnl.com" target="_blank" rel="noopener">Md. Sohel Rana</a></span> <span class="ia-topic">Sustainable and Ethical Sourcing Practices and Their Challenges in the Bangladeshi RMG Industry: A Buying / Liaison Office Perspective</span><em>An empirical study based on woven-bottoms sourcing at the LPP S.A. Bangladesh Liaison Office</em></div></dd></div>
+      <div class="ia-mine-row"><dt class="ia-mine-k">Academic supervisor</dt><dd class="ia-mine-v"><a class="ia-av" href="https://www.du.ac.bd/faculty/faculty_details/IBA/2666" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="saif%20noman%20khan%20atatchment%20photo.jpg" width="296" height="310" loading="lazy" decoding="async" alt=""></a><div class="ia-mine-t"><span class="ia-by"><a href="https://www.du.ac.bd/faculty/faculty_details/IBA/2666" target="_blank" rel="noopener">Mohammad Saif Noman Khan</a></span> <span class="ia-topic">Associate Professor,</span> <span class="ia-topic">Institute of Business Administration, University of Dhaka</span></div></dd></div>
     </dl>
 
     <div class="ia-two">
@@ -1324,11 +1488,12 @@ body.anim .rv-in{opacity:1;transform:none;
   </div></section>
 
   <section class="page pagepad" id="contact"><div class="wrap">
-    <div class="sechead">
-      <h2 class="sec">Contact</h2>
-      <p class="sub">IBA-SICIP programme office and the archive maintainer.</p>
+    <div class="sechead solo">
+      <h2 class="sec tsweep">Contact</h2>
     </div>
     <div class="contact-grid">
+      <div class="ccol">
+      <p class="ccol-h">Archive maintainer</p>
       <div class="person">
         <img class="pphoto" src="images/sohel.jpg" alt="Md. Sohel Rana" width="560" height="560" loading="lazy" decoding="async">
         <div class="pinfo">
@@ -1340,13 +1505,17 @@ body.anim .rv-in{opacity:1;transform:none;
           <div class="wa"><span class="wa-k">WhatsApp</span><code class="wa-v" id="waU1">sohelprsnl</code><button class="wa-c" type="button" data-wa="sohelprsnl" aria-label="Copy the WhatsApp username sohelprsnl">Copy</button><span class="wa-n">Search this username inside WhatsApp</span></div>
         </div>
       </div>
+      </div>
+      <div class="ccol">
+      <p class="ccol-h">Programme office</p>
       <div class="contact" id="contactBox"></div>
+      </div>
     </div>
   </div></section>
 
   <section class="page pagepad" id="gallery"><div class="wrap">
     <div class="sechead solo">
-      <h2 class="sec">Photo Gallery</h2>
+      <h2 class="sec tsweep">Photo Gallery</h2>
     </div>
     <div class="uc">
       <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
@@ -1357,32 +1526,46 @@ body.anim .rv-in{opacity:1;transform:none;
 
   <section class="page pagepad" id="results"><div class="wrap">
     <div class="sechead solo">
-      <h2 class="sec">Results</h2>
+      <h2 class="sec tsweep">Results</h2>
     </div>
     <div class="rescard">
       <p>Batch 11 results, compiled and published here by a classmate. Not an official IBA or SICIP release.</p>
       <a class="btn accent" href="https://sohelprsnl.com/pgd-gb-results/" target="_blank" rel="noopener">Check Results &#8599;</a>
     </div>
+    <a class="imgcard rescheck" href="https://sohelprsnl.com/pgd-gb-results/" target="_blank" rel="noopener">
+      <img src="og-cover-results-v2.png" width="1200" height="630" loading="lazy" decoding="async" alt="PGD-GB Batch 11 Result Checker. Roll and name lookup, transcript and CGPA.">
+      <span class="imgcard-bar"><span class="imgcard-t">Batch 11 Result Checker</span><span class="imgcard-a">sohelprsnl.com/pgd-gb-results <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg></span></span>
+    </a>
     <section class="rdisc" aria-labelledby="rdiscH">
       <h3 class="rdisc-h" id="rdiscH">Disclaimer</h3>
-      <p>The information published on this page has been compiled from materials shared in the official SICIP WhatsApp group, including PDF copies of examination results and ID card images. It is provided solely for the convenience of students and participants.</p><p>This website is independently maintained and is not an official SICIP website. The SICIP Office and its team have no involvement in the preparation, verification, maintenance, or publication of the information available on this page and should not be held responsible for any errors, omissions, or discrepancies.</p><p>Although every effort has been made to ensure accuracy, mistakes or outdated information may occasionally occur. If you notice any incorrect, missing, or inconsistent information, please contact me directly via WhatsApp or email. I will review the information and update it as soon as possible.</p><p>To avoid unnecessary confusion, please do not raise website-related correction requests in the official SICIP WhatsApp group. Instead, kindly contact me directly via WhatsApp or email.</p><p>Thank you for your understanding and cooperation.</p>
+      <p>Compiled from result PDFs and ID card images shared in the official SICIP WhatsApp group. Published for student convenience only.</p><p>This site is independent. The SICIP Office has no role in preparing, checking or publishing it, and is not responsible for any error or omission.</p><p>Errors are possible. Report them to me by WhatsApp or email, not in the SICIP group. I will correct them.</p>
       <div class="wa"><span class="wa-k">WhatsApp</span><code class="wa-v" id="waU2">sohelprsnl</code><button class="wa-c" type="button" data-wa="sohelprsnl" aria-label="Copy the WhatsApp username sohelprsnl">Copy</button><span class="wa-n">Search this username inside WhatsApp</span></div>
     </section>
   </div></section>
 </main>
 <footer class="site-footer">
   <div class="wrap fgrid">
-    <div class="fcol">
-      <p class="fbrand">PGD-GB Programme Archive</p>
-      <p class="fsub">IBA-SICIP &middot; Batch 11 (2025)</p>
+    <div class="fcard fcard-brand">
+      <img class="fcard-mark" src="images/logo-iba-mark.png" alt="" aria-hidden="true">
+      <div>
+        <p class="fbrand tsweep">PGD-GB Programme Archive</p>
+        <p class="fsub">IBA-SICIP, University of Dhaka &middot; Batch 11 (2025)</p>
+      </div>
     </div>
-    <nav class="fcol fnav" aria-label="Footer"><a href="#home">Home</a> <a href="#faculty">Faculty</a> <a href="#curriculum">Modules</a> <a href="#coursepdf">Course Curriculum</a> <a href="#schedule">Class History</a> <a href="#internship">Industry Attachment</a> <a href="#results">Results</a> <a href="#gallery">Photo Gallery</a> <a href="#contact">Contact</a></nav>
-    <div class="fcol">
-      <p class="fdisc">An independent archive compiled by a Batch 11 participant. Not an official publication of IBA, the University of Dhaka or SICIP.</p>
-      <p class="fcred">Compiled and built by Md. Sohel Rana &middot; <a href="https://sohelprsnl.com" target="_blank" rel="noopener">sohelprsnl.com <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg></a></p>
+    <div class="fcard">
+      <p class="fdisc-h">Independent archive</p>
+      <p class="fdisc">Compiled by a Batch 11 participant. Not an official publication of IBA, the University of Dhaka or SICIP.</p>
     </div>
+    <a class="fcard fcard-cred" href="https://sohelprsnl.com" target="_blank" rel="noopener">
+      <img class="fcred-av" src="images/sohel.jpg" width="88" height="88" loading="lazy" decoding="async" alt="" aria-hidden="true">
+      <span class="fcred-txt">
+        <span class="fcred-k">Compiled and built by</span>
+        <span class="fcred-n">Md. Sohel Rana</span>
+        <span class="fcred-l">sohelprsnl.com <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg></span>
+      </span>
+    </a>
   </div>
-  <div class="wrap flegal"><p>PGD-GB Programme Archive &middot; IBA-SICIP, University of Dhaka &middot; Batch 11 (2025)</p></div>
+  <nav class="wrap fnav" aria-label="Footer"><a href="#home"><span>Home</span></a> <a href="#faculty"><span>Faculty</span></a> <a href="#curriculum"><span>Modules</span></a> <a href="#coursepdf"><span>Course Curriculum</span></a> <a href="#schedule"><span>Class History</span></a> <a href="#internship"><span>Industry Attachment</span></a> <a href="#results"><span>Results</span></a> <a href="#gallery"><span>Photo Gallery</span></a> <a href="#contact"><span>Contact</span></a></nav>
 </footer>
 <div class="ov" id="ov"><div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" tabindex="-1"></div></div>
 <script>
