@@ -175,15 +175,15 @@
 /* the two contact cards sweep in sequence, not together */
 .contact::after{animation-delay:.6s}
 /* the nine footer nav chips sweep left to right, one after another */
-.fnav a::after{animation:cardShine 6s var(--ease) infinite}
-.fnav a:nth-child(2)::after,.fnav a:nth-child(2) span{animation-delay:.35s}
-.fnav a:nth-child(3)::after,.fnav a:nth-child(3) span{animation-delay:.7s}
-.fnav a:nth-child(4)::after,.fnav a:nth-child(4) span{animation-delay:1.05s}
-.fnav a:nth-child(5)::after,.fnav a:nth-child(5) span{animation-delay:1.4s}
-.fnav a:nth-child(6)::after,.fnav a:nth-child(6) span{animation-delay:1.75s}
-.fnav a:nth-child(7)::after,.fnav a:nth-child(7) span{animation-delay:2.1s}
-.fnav a:nth-child(8)::after,.fnav a:nth-child(8) span{animation-delay:2.45s}
-.fnav a:nth-child(9)::after,.fnav a:nth-child(9) span{animation-delay:2.8s}
+.fnav a::after{animation:cardShine 11s var(--ease) infinite}
+.fnav a:nth-child(2)::after,.fnav a:nth-child(2) span{animation-delay:.6s}
+.fnav a:nth-child(3)::after,.fnav a:nth-child(3) span{animation-delay:1.2s}
+.fnav a:nth-child(4)::after,.fnav a:nth-child(4) span{animation-delay:1.8s}
+.fnav a:nth-child(5)::after,.fnav a:nth-child(5) span{animation-delay:2.4s}
+.fnav a:nth-child(6)::after,.fnav a:nth-child(6) span{animation-delay:3s}
+.fnav a:nth-child(7)::after,.fnav a:nth-child(7) span{animation-delay:3.6s}
+.fnav a:nth-child(8)::after,.fnav a:nth-child(8) span{animation-delay:4.2s}
+.fnav a:nth-child(9)::after,.fnav a:nth-child(9) span{animation-delay:4.8s}
 /* the three footer cards sweep in sequence, not together */
 .fcard:nth-child(1)::after{animation-delay:0s}
 .fcard:nth-child(2)::after{animation-delay:.5s}
@@ -760,14 +760,16 @@ table.sch tbody tr:hover td{background:var(--accent-soft)}
 .ia-mine-v{margin:0;font-size:var(--fs-base);line-height:1.55;color:var(--ink);max-width:var(--measure);
   display:flex;gap:var(--s3);align-items:flex-start}
 .ia-mine-t{min-width:0}
-/* the portrait repeats the name's link, so it is hidden from screen readers and skipped by tab */
-.ia-av{flex:none;display:block;width:52px;height:52px;border-radius:var(--rfull);overflow:hidden;
+/* passport-proportion portrait, 3:4, square corners.
+   the link repeats the name's link, so it is hidden from screen readers and skipped by tab */
+.ia-av{flex:none;display:block;width:88px;height:117px;overflow:hidden;
   border:1px solid var(--line);background:var(--tint-1);
-  transition:border-color var(--dur-base),transform var(--dur-base)}
-.ia-av:hover{border-color:var(--accent-fill);transform:translateY(-1px)}
-.ia-av img{width:100%;height:100%;object-fit:cover;object-position:50% 5%;display:block}
-@media(prefers-reduced-motion:reduce){.ia-av,.ia-av:hover{transform:none;transition:none}}
-@media(max-width:640px){.ia-av{width:44px;height:44px}}
+  transition:border-color var(--dur-base),box-shadow var(--dur-base)}
+.ia-av:hover{border-color:var(--accent-fill);box-shadow:var(--e2)}
+.ia-av img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block}
+/* the DU photo is near-square and his face sits right of centre, so shift the crop */
+.ia-av-snk img{object-position:57% 42%}
+@media(max-width:640px){.ia-av{width:72px;height:96px}}
 .ia-mine-v em{display:block;font-style:normal;font-size:var(--fs-sm);color:var(--slate);margin-top:5px;line-height:1.45}
 .ia-by{display:block;margin:0 0 var(--s3);font-size:var(--fs-base);font-weight:600}
 .ia-topic{display:block}
@@ -899,27 +901,29 @@ body.noscroll{overflow:hidden}
 @media(max-width:1023px){.fnav{gap:6px}.fnav a{padding:6px 9px;font-size:11.5px}}
 /* a bright band travels through the label itself, in step with the chip sweep.
    the base stops stay solid slate, so contrast only ever goes up, never down */
-@keyframes navText{0%{background-position:100% 50%}60%,100%{background-position:0% 50%}}
+/* travel occupies 75% of the cycle, not 60%, so the band crosses more slowly
+   before the rest period. paired with the longer duration below. */
+@keyframes navText{0%{background-position:100% 50%}75%,100%{background-position:0% 50%}}
 /* the wordmark itself: base stops are currentColor, so only the band adds colour.
    hero and footer loop; the sticky header sweeps once on load, then rests. */
 @supports((-webkit-background-clip:text) or (background-clip:text)){
   .tsweep,.tsweep-once{
-    background-image:linear-gradient(100deg,currentColor 0%,currentColor 40%,
-      var(--nav-hi) 50%,currentColor 60%,currentColor 100%);
+    background-image:linear-gradient(100deg,currentColor 0%,currentColor 32%,
+      var(--nav-hi) 50%,currentColor 68%,currentColor 100%);
     background-size:260% 100%;background-position:100% 50%;background-repeat:no-repeat;
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .tsweep{animation:navText 6s var(--ease) infinite}
-  .tsweep-once{animation:navText 2.4s var(--ease) .4s 1 both}
+  .tsweep{animation:navText 11s linear infinite}
+  .tsweep-once{animation:navText 4.5s linear .4s 1 both}
   .ahero h1.tsweep{animation-delay:.4s}
   .fbrand.tsweep{animation-delay:.8s}
 }
 @supports((-webkit-background-clip:text) or (background-clip:text)){
   .fnav a span{
-    background-image:linear-gradient(100deg,var(--slate) 0%,var(--slate) 40%,
-      var(--nav-hi) 50%,var(--slate) 60%,var(--slate) 100%);
+    background-image:linear-gradient(100deg,var(--slate) 0%,var(--slate) 32%,
+      var(--nav-hi) 50%,var(--slate) 68%,var(--slate) 100%);
     background-size:260% 100%;background-position:100% 50%;background-repeat:no-repeat;
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-    animation:navText 6s var(--ease) infinite}
+    animation:navText 11s linear infinite}
   .fnav a:hover span,.fnav a:focus-visible span{-webkit-text-fill-color:var(--accent-ink);animation:none}
 }
 .fdisc{font-size:var(--fs-xs);color:var(--slate);line-height:1.5;max-width:none}
@@ -1375,7 +1379,7 @@ body.anim .rv-in{opacity:1;transform:none;
 
     <dl class="ia-mine">
       <div class="ia-mine-row"><dt class="ia-mine-k">My topic</dt><dd class="ia-mine-v"><a class="ia-av" href="https://sohelprsnl.com" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="sohel%20atatchment%20photo.png" width="1104" height="1440" loading="lazy" decoding="async" alt=""></a><div class="ia-mine-t"><span class="ia-by"><a href="https://sohelprsnl.com" target="_blank" rel="noopener">Md. Sohel Rana</a></span> <span class="ia-topic">Sustainable and Ethical Sourcing Practices and Their Challenges in the Bangladeshi RMG Industry: A Buying / Liaison Office Perspective</span><em>An empirical study based on woven-bottoms sourcing at the LPP S.A. Bangladesh Liaison Office</em></div></dd></div>
-      <div class="ia-mine-row"><dt class="ia-mine-k">Academic supervisor</dt><dd class="ia-mine-v"><a class="ia-av" href="https://www.du.ac.bd/faculty/faculty_details/IBA/2666" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="saif%20noman%20khan%20atatchment%20photo.jpg" width="296" height="310" loading="lazy" decoding="async" alt=""></a><div class="ia-mine-t"><span class="ia-by"><a href="https://www.du.ac.bd/faculty/faculty_details/IBA/2666" target="_blank" rel="noopener">Mohammad Saif Noman Khan</a></span> <span class="ia-topic">Associate Professor,</span> <span class="ia-topic">Institute of Business Administration, University of Dhaka</span></div></dd></div>
+      <div class="ia-mine-row"><dt class="ia-mine-k">Academic supervisor</dt><dd class="ia-mine-v"><a class="ia-av ia-av-snk" href="https://www.du.ac.bd/faculty/faculty_details/IBA/2666" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="saif%20noman%20khan%20atatchment%20photo.jpg" width="296" height="310" loading="lazy" decoding="async" alt=""></a><div class="ia-mine-t"><span class="ia-by"><a href="https://www.du.ac.bd/faculty/faculty_details/IBA/2666" target="_blank" rel="noopener">Mohammad Saif Noman Khan</a></span> <span class="ia-topic">Associate Professor,</span> <span class="ia-topic">Institute of Business Administration, University of Dhaka</span></div></dd></div>
     </dl>
 
     <div class="ia-two">
