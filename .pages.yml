@@ -1,0 +1,24 @@
+# Pages CMS settings (https://app.pagescms.org)
+# The archive is one page. Lecturer and class data sit inside index.html
+# in the block that starts "const DATA =". Edit with care: a missing comma
+# or quote there breaks the whole page. Images and forms are in Media.
+media:
+  - name: images
+    label: Photos and logos
+    input: images
+    output: images
+    categories: [image]
+  - name: forms
+    label: Forms and PDFs
+    input: forms
+    output: forms
+
+content:
+  - name: pages
+    label: Pages (raw HTML)
+    type: group
+    items:
+      - { name: page-index, label: Archive (index.html), type: file, path: index.html, format: code }
+      - { name: page-404, label: Error page (404), type: file, path: 404.html, format: code }
+      - { name: page-sitemap, label: Sitemap (advanced), type: file, path: sitemap.xml, format: code }
+      - { name: page-readme, label: README, type: file, path: README.md, format: code }
