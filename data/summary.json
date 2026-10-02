@@ -1,0 +1,38 @@
+{
+  "modules": {
+    "Module-3": {
+      "Managerial Communication for RMG": 8,
+      "Business Analytics": 8,
+      "Industry Attachment-Activities-Report-Defence": 4
+    },
+    "Module-2": {
+      "Introduction to RMG": 1,
+      "Human Resource Management": 4,
+      "Commercial and Finance": 4,
+      "Marketing & Merchandising": 7,
+      "Production/ Industrial Engineering": 7,
+      "Product Development/Fashion/Dying/Others": 7,
+      "Managerial Training": 4,
+      "Cost Analysis": 3,
+      "Compliance": 3,
+      "Business Strategy and Innovation": 8
+    },
+    "Module-1": {
+      "Accounting for Managers": 8,
+      "Business Communication": 8,
+      "Financial Management": 8,
+      "Managing People and Organization": 8,
+      "Marketing Management": 8
+    }
+  },
+  "stats": {
+    "total": 54,
+    "faculty": 17,
+    "industry": 37,
+    "classes": 108,
+    "m1": 40,
+    "m2": 48,
+    "m3": 20,
+    "sessions": 108
+  }
+}

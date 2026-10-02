@@ -1,0 +1,41 @@
+# Rebuilds the data line in index.html whenever a file in data/ changes
+# (for example, after a Pages CMS save). A data error fails the run and
+# leaves the live page as it was.
+name: Build archive from data
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "data/*.json"
+      - scripts/build_archive.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-archive
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Rebuild index.html from data/
+        run: python3 scripts/build_archive.py
+      - name: Commit the rebuilt page
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "Page already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Rebuild index.html from data/"
+          git push
