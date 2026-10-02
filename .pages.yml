@@ -1,7 +1,16 @@
 # Pages CMS settings (https://app.pagescms.org)
-# The archive is one page. Lecturer and class data sit inside index.html
-# in the block that starts "const DATA =". Edit with care: a missing comma
-# or quote there breaks the whole page. Images and forms are in Media.
+#
+# Two ways to edit:
+#   1. Forms. Lecturers and Classes save to files in data/. A GitHub Action
+#      then writes the data back into index.html. About two minutes to go live.
+#   2. Archive (raw HTML). The whole page as code, for headings, text and the
+#      curriculum tables. Do not edit the line that starts "const DATA =";
+#      the build overwrites it from the data files.
+#
+# Photos: each lecturer has two files in images/, <img>.jpg and <img>_t.jpg
+# (the small one). Upload both through Media, then put the file name
+# without extension in the lecturer's "Image file name" field.
+
 media:
   - name: images
     label: Photos and logos
@@ -14,6 +23,66 @@ media:
     output: forms
 
 content:
+  - name: lecturers
+    label: Lecturers
+    type: file
+    path: data/lecturers.json
+    format: json
+    list: true
+    description: One entry per lecturer, in the order shown on the site.
+    fields:
+      - { name: name, label: Full name as shown, type: string, required: true }
+      - { name: slug, label: "ID (lowercase-with-dashes; must match the classes list)", type: string, required: true,
+          pattern: { regex: "^[a-z0-9-]+$", message: "Lowercase letters, numbers and dashes only" } }
+      - { name: category, label: Category, type: select, required: true,
+          options: { values: ["IBA Faculty & Staff", "Industry Guest Lecturer"] } }
+      - { name: ltype, label: Lecturer type, type: select,
+          options: { values: ["IBA Faculty", "Guest Lecturer", ""] } }
+      - { name: org, label: Organisation, type: string }
+      - { name: title, label: Designation, type: string }
+      - { name: email1, label: E-mail 1, type: string }
+      - { name: email2, label: E-mail 2, type: string }
+      - { name: phone1, label: Phone 1, type: string }
+      - { name: phone2, label: Phone 2, type: string }
+      - { name: linkedin, label: LinkedIn (without https://), type: string }
+      - { name: birthday, label: Birthday, type: string }
+      - { name: img, label: Image file name (without extension), type: string }
+      - { name: photo, label: Original photo file name (record only), type: string }
+      - { name: subjects, label: Subjects taught, type: string, list: true }
+      - { name: modules, label: Modules, type: select, list: true,
+          options: { values: [Module-1, Module-2, Module-3] } }
+      - { name: classes, label: Classes assigned, type: number }
+      - { name: online, label: Online classes, type: number }
+      - { name: offline, label: Offline classes, type: number }
+
+  - name: schedule
+    label: Classes
+    type: file
+    path: data/schedule.json
+    format: json
+    list: true
+    description: One entry per class, oldest first. The lecturer ID must match an entry in Lecturers.
+    fields:
+      - { name: date, label: Date, type: date, required: true, options: { format: yyyy-MM-dd } }
+      - { name: disp, label: "Date as shown (for example 11 Jul 2025)", type: string, required: true }
+      - { name: module, label: Module, type: select, required: true,
+          options: { values: [Module-1, Module-2, Module-3] } }
+      - { name: subject, label: Subject, type: string, required: true }
+      - { name: code, label: Course code, type: string }
+      - { name: session, label: "Session (for example Class 1)", type: string }
+      - { name: lecturer, label: Lecturer name as shown, type: string, required: true }
+      - { name: lslug, label: Lecturer ID (matches Lecturers), type: string, required: true,
+          pattern: { regex: "^[a-z0-9-]+$", message: "Lowercase letters, numbers and dashes only" } }
+      - { name: type, label: Mode, type: select, required: true,
+          options: { values: [Off-line, Online] } }
+
+  - name: summary
+    label: Module summary and stats (advanced)
+    type: file
+    path: data/summary.json
+    format: code
+    description: Subject counts per module and the home page numbers. JSON. Edit only if the schedule changes.
+
   - name: pages
     label: Pages (raw HTML)
     type: group
