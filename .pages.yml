@@ -98,7 +98,8 @@ content:
           fields: [
             { name: f, label: "File name without extension", type: string, required: true },
             { name: w, label: "Width of the 4K file (px)", type: number, required: true },
-            { name: h, label: "Height of the 4K file (px)", type: number, required: true }
+            { name: h, label: "Height of the 4K file (px)", type: number, required: true },
+            { name: b, label: "Size of the 4K file (bytes, for the download label)", type: number }
           ] }
 
   - name: summary
