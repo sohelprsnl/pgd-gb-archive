@@ -1124,23 +1124,23 @@
   {
     "date": "2026-04-03",
     "disp": "03 Apr 2026",
-    "module": "Module-2",
-    "subject": "Industry Module Topics",
-    "code": "IMT-36",
-    "session": "Class 1",
-    "lecturer": "Nasimul Gani, RTecM-Sainsbury DLO",
-    "lslug": "nasimul-gani-rtecm-sainsbury-dlo",
-    "type": "Off-line"
-  },
-  {
-    "date": "2026-04-04",
-    "disp": "04 Apr 2026",
     "module": "Module-3",
     "subject": "Business Analytics",
     "code": "BA",
     "session": "Class 7",
     "lecturer": "Prof Avijit Mollik",
     "lslug": "prof-avijit-mollik",
+    "type": "Off-line"
+  },
+  {
+    "date": "2026-04-03",
+    "disp": "03 Apr 2026",
+    "module": "Module-2",
+    "subject": "Industry Module Topics",
+    "code": "IMT-36",
+    "session": "Class 1",
+    "lecturer": "Nasimul Gani, RTecM-Sainsbury DLO",
+    "lslug": "nasimul-gani-rtecm-sainsbury-dlo",
     "type": "Off-line"
   },
   {
