@@ -5,6 +5,8 @@ A static website. No build step, no server. Host the files as-is.
 ## Files
 - `index.html` — the entire site (HTML, CSS, JavaScript and data are inlined)
 - `images/` — logos and lecturer photos
+- `gallery/` — Photo Gallery: 50 albums, 583 photos. Each photo is `<name>.avif` (4K, up to 3840 px) plus `<name>_t.webp` (640 px thumbnail)
+- `data/gallery.json` — album list (title, date, caption, lecturer ID, photos). `scripts/build_archive.py` writes it into `index.html`
 - `curriculum.pdf` — the course curriculum document (Course Curriculum tab)
 - `.nojekyll` — tells GitHub Pages to serve every file as-is
 
