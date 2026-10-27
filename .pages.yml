@@ -1,7 +1,7 @@
 # Pages CMS settings (https://app.pagescms.org)
 #
 # Two ways to edit:
-#   1. Forms. Lecturers and Classes save to files in data/. A GitHub Action
+#   1. Forms. Lecturers, Classes and Photo Gallery save to files in data/. A GitHub Action
 #      then writes the data back into index.html. About two minutes to go live.
 #   2. Archive (raw HTML). The whole page as code, for headings, text and the
 #      curriculum tables. Do not edit the line that starts "const DATA =";
@@ -75,6 +75,31 @@ content:
           pattern: { regex: "^[a-z0-9-]+$", message: "Lowercase letters, numbers and dashes only" } }
       - { name: type, label: Mode, type: select, required: true,
           options: { values: [Off-line, Online] } }
+
+  - name: gallery
+    label: Photo Gallery albums
+    type: file
+    path: data/gallery.json
+    format: json
+    list: true
+    description: One entry per album. Edit titles and captions here. Photos live in gallery/<category>/<folder>/ as <name>.avif (4K) and <name>_t.webp (thumbnail). The first photo is the album cover.
+    fields:
+      - { name: seq, label: "Album number (for example 001)", type: string, required: true }
+      - { name: category, label: Album type, type: select, required: true,
+          options: { values: [group-pictures, others] } }
+      - { name: date, label: Date, type: date, required: true, options: { format: yyyy-MM-dd } }
+      - { name: disp, label: "Date as shown (for example 10 Apr 2026)", type: string, required: true }
+      - { name: title, label: Album title, type: string, required: true }
+      - { name: caption, label: Caption, type: text }
+      - { name: folder, label: "Folder name in gallery/ (do not change after upload)", type: string, required: true }
+      - { name: lslug, label: "Lecturer ID (matches Lecturers; blank for events)", type: string }
+      - { name: cover, label: "Cover photo position (0 = first)", type: number }
+      - { name: photos, label: Photos, type: object, list: true,
+          fields: [
+            { name: f, label: "File name without extension", type: string, required: true },
+            { name: w, label: "Width of the 4K file (px)", type: number, required: true },
+            { name: h, label: "Height of the 4K file (px)", type: number, required: true }
+          ] }
 
   - name: summary
     label: Module summary and stats (advanced)

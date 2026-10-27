@@ -7,6 +7,7 @@ that line from three files, and changes nothing else on the page:
   data/lecturers.json   the 54 lecturer profiles (every field kept as stored)
   data/schedule.json    the 108 dated classes
   data/summary.json     the module subject counts and the home page stats
+  data/gallery.json     the photo gallery albums (optional; photos live in gallery/)
 
 Run from anywhere:  python3 scripts/build_archive.py
 Standard library only. If a data file has an error, the page is not written.
@@ -64,6 +65,24 @@ def main():
 
     data = {"lecturers": lecturers, "schedule": schedule,
             "modules": summary["modules"], "stats": summary["stats"]}
+
+    gallery = []
+    if (DATA / "gallery.json").exists():
+        gallery = load("gallery.json", list)
+        check(gallery, "gallery.json", ("category", "date", "disp", "title", "folder", "photos"))
+        for a in gallery:
+            if a["category"] not in ("group-pictures", "others"):
+                raise DataError(f"gallery.json, {a['folder']}: category must be group-pictures or others")
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(a["date"])):
+                raise DataError(f"gallery.json, {a['folder']}: date must look like 2025-07-11")
+            if a.get("lslug") and a["lslug"] not in slugs:
+                raise DataError(f"gallery.json, {a['folder']}: lecturer slug '{a['lslug']}' is not in lecturers.json")
+            if not isinstance(a["photos"], list) or not a["photos"]:
+                raise DataError(f"gallery.json, {a['folder']}: needs at least one photo")
+            for ph in a["photos"]:
+                if not ph.get("f") or not ph.get("w") or not ph.get("h"):
+                    raise DataError(f"gallery.json, {a['folder']}: each photo needs f, w and h")
+        data["gallery"] = gallery
     line = MARK + json.dumps(data, ensure_ascii=False) + ";"
 
     page = PAGE.read_text(encoding="utf-8")
@@ -73,7 +92,8 @@ def main():
     new = pattern.sub(lambda m: line, page, count=1)
     if new != page:
         PAGE.write_text(new, encoding="utf-8")
-    print(f"Built: {len(lecturers)} lecturers, {len(schedule)} classes. "
+    print(f"Built: {len(lecturers)} lecturers, {len(schedule)} classes, "
+          f"{len(gallery)} gallery albums. "
           f"index.html {'updated' if new != page else 'already up to date'}.")
 
 
