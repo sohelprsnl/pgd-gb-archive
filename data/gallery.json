@@ -3431,19 +3431,25 @@
     "caption": "PGD-GB Batch 11: IBA ID card distribution by the SICIP team, 15 August 2025.",
     "folder": "003_2025-08-15_id-card-received",
     "lslug": "",
-    "cover": 0,
+    "cover": 1,
     "photos": [
       {
-        "f": "img-2279-002",
+        "f": "idcard-2025-08-15-01",
         "w": 3840,
         "h": 2880,
-        "b": 535197
+        "b": 294702
       },
       {
-        "f": "img-2284-002",
+        "f": "idcard-2025-08-15-02",
         "w": 3840,
         "h": 2880,
-        "b": 654997
+        "b": 285162
+      },
+      {
+        "f": "idcard-2025-08-15-03",
+        "w": 3840,
+        "h": 2880,
+        "b": 324758
       },
       {
         "f": "img-2287-002",
