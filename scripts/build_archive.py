@@ -79,6 +79,9 @@ def main():
                 raise DataError(f"gallery.json, {a['folder']}: lecturer slug '{a['lslug']}' is not in lecturers.json")
             if not isinstance(a["photos"], list) or not a["photos"]:
                 raise DataError(f"gallery.json, {a['folder']}: needs at least one photo")
+            for v in a.get("videos", []):
+                if not re.fullmatch(r"[A-Za-z0-9_-]{11}", str(v.get("yt", ""))) or not v.get("p"):
+                    raise DataError(f"gallery.json, {a['folder']}: each video needs an 11-character YouTube id (yt) and a poster name (p)")
             for ph in a["photos"]:
                 if not ph.get("f") or not ph.get("w") or not ph.get("h"):
                     raise DataError(f"gallery.json, {a['folder']}: each photo needs f, w and h")
