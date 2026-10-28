@@ -3535,8 +3535,14 @@
     "caption": "PGD-GB Batch 11: IBA campus and lounge memories, 12 December 2025.",
     "folder": "005_2025-12-12_iba-campus-and-lounge-memories",
     "lslug": "",
-    "cover": 0,
+    "cover": 1,
     "photos": [
+      {
+        "f": "img-1262",
+        "w": 3824,
+        "h": 3840,
+        "b": 583151
+      },
       {
         "f": "img-1265",
         "w": 3840,
@@ -3554,6 +3560,12 @@
         "w": 3840,
         "h": 3608,
         "b": 844180
+      },
+      {
+        "f": "img-1340",
+        "w": 3422,
+        "h": 3840,
+        "b": 358289
       }
     ]
   },
