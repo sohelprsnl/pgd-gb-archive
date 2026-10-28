@@ -101,6 +101,13 @@ content:
             { name: h, label: "Height of the 4K file (px)", type: number, required: true },
             { name: b, label: "Size of the 4K file (bytes, for the download label)", type: number }
           ] }
+      - { name: videos, label: Videos (YouTube), type: object, list: true,
+          fields: [
+            { name: yt, label: "YouTube video ID (11 characters, from youtu.be/<ID>)", type: string, required: true },
+            { name: p, label: "Poster image name in the album folder, without _t.webp", type: string, required: true },
+            { name: dur, label: "Duration as shown (for example 2:27)", type: string },
+            { name: title, label: Video title, type: string }
+          ] }
 
   - name: summary
     label: Module summary and stats (advanced)
