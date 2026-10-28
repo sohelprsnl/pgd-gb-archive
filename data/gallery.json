@@ -4225,5 +4225,42 @@
         "b": 220629
       }
     ]
+  },
+  {
+    "seq": "015",
+    "category": "others",
+    "date": "2026-01-16",
+    "disp": "16 Jan 2026",
+    "title": "IBA Memories",
+    "caption": "PGD-GB Batch 11: IBA memories, Institute of Business Administration, University of Dhaka, 16 January 2026.",
+    "folder": "015_2026-01-16_iba-memories",
+    "lslug": "",
+    "cover": 0,
+    "photos": [
+      {
+        "f": "iba-memories-2026-01-16-01",
+        "w": 2392,
+        "h": 3840,
+        "b": 337889
+      },
+      {
+        "f": "iba-memories-2026-01-16-02",
+        "w": 2407,
+        "h": 3840,
+        "b": 337832
+      },
+      {
+        "f": "iba-memories-2026-01-16-03",
+        "w": 2487,
+        "h": 3840,
+        "b": 186696
+      },
+      {
+        "f": "iba-memories-2026-01-16-04",
+        "w": 2161,
+        "h": 3840,
+        "b": 247784
+      }
+    ]
   }
 ]
