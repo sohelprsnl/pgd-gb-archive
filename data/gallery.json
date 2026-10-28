@@ -4170,5 +4170,30 @@
         "b": 753293
       }
     ]
+  },
+  {
+    "seq": "014",
+    "category": "others",
+    "date": "2026-07-19",
+    "disp": "19 Jul 2026",
+    "title": "Industry Attachment Final Report Submission",
+    "caption": "PGD-GB Batch 11: Industry Attachment final report submission, 19 July 2026.",
+    "folder": "014_2026-07-19_industry-attachment-final-report-submission",
+    "lslug": "",
+    "cover": 0,
+    "photos": [
+      {
+        "f": "ia-report-2026-07-19-01",
+        "w": 2728,
+        "h": 3840,
+        "b": 254024
+      },
+      {
+        "f": "ia-report-2026-07-19-02",
+        "w": 2437,
+        "h": 3840,
+        "b": 220629
+      }
+    ]
   }
 ]
