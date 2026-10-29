@@ -71,8 +71,8 @@ def main():
         gallery = load("gallery.json", list)
         check(gallery, "gallery.json", ("category", "date", "disp", "title", "folder", "photos"))
         for a in gallery:
-            if a["category"] not in ("group-pictures", "others"):
-                raise DataError(f"gallery.json, {a['folder']}: category must be group-pictures or others")
+            if a["category"] not in ("group-pictures", "others", "sicip-events"):
+                raise DataError(f"gallery.json, {a['folder']}: category must be group-pictures, others or sicip-events")
             if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(a["date"])):
                 raise DataError(f"gallery.json, {a['folder']}: date must look like 2025-07-11")
             if a.get("lslug") and a["lslug"] not in slugs:
