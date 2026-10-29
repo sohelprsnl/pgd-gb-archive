@@ -86,7 +86,7 @@ content:
     fields:
       - { name: seq, label: "Album number (for example 001)", type: string, required: true }
       - { name: category, label: Album type, type: select, required: true,
-          options: { values: [group-pictures, others] } }
+          options: { values: [group-pictures, others, sicip-events] } }
       - { name: date, label: Date, type: date, required: true, options: { format: yyyy-MM-dd } }
       - { name: disp, label: "Date as shown (for example 10 Apr 2026)", type: string, required: true }
       - { name: title, label: Album title, type: string, required: true }
