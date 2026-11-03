@@ -1186,6 +1186,8 @@ body.anim .rv-in{opacity:1;transform:none;
 }
 /* ================= photo gallery ================= */
 .gfilters{display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap;margin-top:var(--s2)}
+.gfilters .chip:disabled{opacity:.38;cursor:not-allowed;border-style:dashed}
+@media(min-width:901px){#gallery .fhead{flex-wrap:nowrap}#gallery .fhead-left{flex:1 1 auto}#gallery .fhead-right{flex:0 0 auto}}
 .gfilters .rescount{margin:0 0 0 auto;white-space:nowrap}
 .gsep{width:1px;height:24px;background:var(--line-strong);flex:none}
 .gbar .fsel{flex:0 0 auto}
@@ -2344,7 +2346,9 @@ function gFiltered(){
   if(gState.sort==='new')list=list.slice().reverse();
   return list;
 }
+function gHas(cat,lect){for(var i=0;i<GAL.length;i++){var a=GAL[i];if((cat==='all'||a.category===cat)&&(lect==='all'||a._ltype===lect))return true;}return false;}
 function gRender(){
+  document.querySelectorAll('#gLect .chip').forEach(function(c){var off=!gHas(gState.cat,c.dataset.l);c.disabled=off;c.title=off?'No albums of this type in this section':'';});
   var list=gFiltered(), grid=document.getElementById('gGrid');
   grid.innerHTML=list.map(gCardHTML).join('');
   var n=list.reduce(function(s,a){return s+a.photos.length;},0);
@@ -2366,7 +2370,9 @@ function gBuild(){
   var evs=GAL.filter(function(a){return a.category==='sicip-events';}).length;
   document.getElementById('gBreak').innerHTML='<b>'+GAL.length+'</b> albums &middot; <b>'+GTOTAL+'</b> photos<br>'
     +cls+' class albums &middot; '+evb+' Batch 11 events &middot; '+evs+' SICIP &amp; alumni events';
-  document.querySelectorAll('#gCat .chip').forEach(function(c){c.addEventListener('click',function(){gState.cat=c.dataset.g;gSetChips('gCat','data-g',gState.cat);gRender();});});
+  document.querySelectorAll('#gCat .chip').forEach(function(c){c.addEventListener('click',function(){gState.cat=c.dataset.g;
+    if(gState.lect!=='all'&&!gHas(gState.cat,gState.lect)){gState.lect='all';gSetChips('gLect','data-l','all');}
+    gSetChips('gCat','data-g',gState.cat);gRender();});});
   document.querySelectorAll('#gLect .chip').forEach(function(c){c.addEventListener('click',function(){gState.lect=c.dataset.l;gSetChips('gLect','data-l',gState.lect);gRender();});});
   var s=document.getElementById('gSearch');s.addEventListener('input',function(){gState.q=s.value;gRender();});
   var so=document.getElementById('gSort');so.addEventListener('change',function(){gState.sort=so.value;gRender();});
