@@ -1191,7 +1191,7 @@ body.anim .rv-in{opacity:1;transform:none;
 .gbar .fsel{flex:0 0 auto}
 @media (max-width:899px){.gstick{position:static}}
 @media (max-width:640px){.gsep{display:none}.gfilters .rescount{flex:1 1 100%;margin:0}
-  .gfilters .filters{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+  .gfilters .filters{flex-wrap:wrap;width:100%}
   .gfilters .filters::-webkit-scrollbar{display:none}
   .gfilters .chip{flex:none}
   .gbar .search{flex:1 1 150px}}
@@ -1648,7 +1648,7 @@ a.glb-btn{text-decoration:none}
         <div class="fhead">
           <div class="fhead-left">
             <h2 class="sec tsweep">Photo Gallery</h2>
-            <p class="sub">Batch 11 class days and events, July 2025 to July 2026. Open an album to see every photo in 4K.</p>
+            <p class="sub">Batch 11 class days, events, and SICIP &amp; alumni events, July 2025 to October 2026. Open an album to see every photo in 4K.</p>
           </div>
           <div class="fhead-right">
             <p class="fbreak" id="gBreak"></p>
@@ -2362,8 +2362,10 @@ function gBuild(){
   var fac=GAL.filter(function(a){return a._ltype==='IBA Faculty & Staff';}).length;
   var ind=GAL.filter(function(a){return a._ltype==='Industry Guest Lecturer';}).length;
   var cls=GAL.filter(function(a){return a.category==='group-pictures';}).length;
+  var evb=GAL.filter(function(a){return a.category==='others';}).length;
+  var evs=GAL.filter(function(a){return a.category==='sicip-events';}).length;
   document.getElementById('gBreak').innerHTML='<b>'+GAL.length+'</b> albums &middot; <b>'+GTOTAL+'</b> photos<br>'
-    +cls+' class albums &middot; '+fac+' IBA Faculty &middot; '+ind+' Industry Guest';
+    +cls+' class albums &middot; '+evb+' Batch 11 events &middot; '+evs+' SICIP &amp; alumni events';
   document.querySelectorAll('#gCat .chip').forEach(function(c){c.addEventListener('click',function(){gState.cat=c.dataset.g;gSetChips('gCat','data-g',gState.cat);gRender();});});
   document.querySelectorAll('#gLect .chip').forEach(function(c){c.addEventListener('click',function(){gState.lect=c.dataset.l;gSetChips('gLect','data-l',gState.lect);gRender();});});
   var s=document.getElementById('gSearch');s.addEventListener('input',function(){gState.q=s.value;gRender();});
